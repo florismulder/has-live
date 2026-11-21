@@ -1,25 +1,24 @@
 <!doctype html>
-<html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="HAS Live"><meta name="robots" content="noindex,nofollow">
+<html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><link rel="apple-touch-icon" href="/icon.png"><link rel="icon" href="/icon.png"><link rel="manifest" href="/manifest.webmanifest"><meta name="apple-mobile-web-app-title" content="HAS Live"><meta name="robots" content="noindex,nofollow">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head><body>
 <title>HAS Live</title>
-<meta name="theme-color" content="#14342b">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#faf9f5">
 <style>
 :root {
-  --bg: #f4f1ea; --card: #fffdf8; --ink: #17241f; --muted: #66746d; --line: #ddd8cb;
-  --pitch: #14342b; --pitch-ink: #f4f1ea; --accent: #d9622b; --accent-ink: #ffffff;
-  --win: #2f7d4f; --draw: #b58a14; --loss: #b8432f; --hi: #fbe9c9; --sheet-shade: rgba(20,30,26,.45);
-  --head: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif; --body: "Barlow", system-ui, -apple-system, sans-serif;
+  --bg: #faf9f5; --card: #ffffff; --ink: #141413; --muted: #73726c; --line: #e8e6dc;
+  --pitch: #2b2a28; --pitch-ink: #f5f4ed; --accent: #d97757; --accent-ink: #ffffff;
+  --win: #3f7d4f; --draw: #c99a00; --loss: #c0563a; --hi: #fbe3b0; --sheet-shade: rgba(20,20,19,.45);
+  --head: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, "Segoe UI", sans-serif; --body: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", sans-serif;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --bg: #0f1b17; --card: #172823; --ink: #ece8dc; --muted: #93a39b; --line: #284039;
-  --pitch: #0a2019; --pitch-ink: #ece8dc; --accent: #f08049; --accent-ink: #1a1410;
-  --win: #5fbf86; --draw: #e0b84a; --loss: #e57b66; --hi: #3a3020; --sheet-shade: rgba(0,0,0,.6); color-scheme: dark; } }
+  --bg: #262624; --card: #30302e; --ink: #f5f4ed; --muted: #a8a69c; --line: #3d3d3a;
+  --pitch: #1f1e1d; --pitch-ink: #f5f4ed; --accent: #d97757; --accent-ink: #ffffff;
+  --win: #6fbf86; --draw: #e0b84a; --loss: #e58d6f; --hi: #6b4e1f; --sheet-shade: rgba(0,0,0,.6); color-scheme: dark; } }
 :root[data-theme="dark"] {
-  --bg: #0f1b17; --card: #172823; --ink: #ece8dc; --muted: #93a39b; --line: #284039;
-  --pitch: #0a2019; --pitch-ink: #ece8dc; --accent: #f08049; --accent-ink: #1a1410;
-  --win: #5fbf86; --draw: #e0b84a; --loss: #e57b66; --hi: #3a3020; --sheet-shade: rgba(0,0,0,.6); color-scheme: dark; }
+  --bg: #262624; --card: #30302e; --ink: #f5f4ed; --muted: #a8a69c; --line: #3d3d3a;
+  --pitch: #1f1e1d; --pitch-ink: #f5f4ed; --accent: #d97757; --accent-ink: #ffffff;
+  --win: #6fbf86; --draw: #e0b84a; --loss: #e58d6f; --hi: #6b4e1f; --sheet-shade: rgba(0,0,0,.6); color-scheme: dark; }
 * { box-sizing: border-box; }
 body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.4; margin: 0; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 88px; -webkit-text-size-adjust: 100%; }
 .wrap { max-width: 760px; margin: 0 auto; }
@@ -27,18 +26,31 @@ button { font: inherit; color: inherit; cursor: pointer; }
 h1, h2, h3 { font-family: var(--head); margin: 0; letter-spacing: .01em; text-wrap: balance; }
 .top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg); padding: 10px 0 8px; margin: 0 -16px; padding-left: 16px; padding-right: 16px; border-bottom: 1px solid var(--line); }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--bg); }
+.hbar { display: flex; gap: 8px; margin: 0 0 8px; flex-wrap: wrap; }
+.hbtn { font-family: inherit; font-size: 14px; font-weight: 600; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); border-radius: 7px; padding: 6px 12px; min-height: 36px; }
+.hbtn[aria-pressed="true"] { background: var(--pitch); color: var(--pitch-ink); border-color: var(--pitch); }
+.mv { position: absolute; bottom: 5px; right: 5px; display: inline-flex; gap: 2px; }
+.mv span { width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(128,128,128,.3); font-size: 15px; line-height: 1; }
+.twocol { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+@media (min-width: 640px) { .twocol { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.sheet table.stand td, .sheet table.stand th { white-space: nowrap; }
+.stand-full { font-size: 16px; } .stand-full th { font-size: 13px; padding: 6px 8px; } .stand-full td { padding: 9px 8px; } .stand-full td:nth-child(2) { white-space: nowrap; }
+.tops td:nth-child(2), .tops th:nth-child(2), .tops td:nth-child(3), .tops th:nth-child(3) { text-align: left; }
+.sheetbg.center .sheet.wide { max-width: 860px; max-height: 90vh; }
+.blockgap { margin-bottom: 22px; } .blockgap:last-child { margin-bottom: 0; }
+@media (max-width: 600px) { .stand-full { font-size: 13px; } .stand-full td, .stand-full th { padding: 6px 4px; } }
 .brandrow { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
 .brand { font-family: var(--head); font-weight: 700; font-size: 22px; letter-spacing: .08em; }
 .brand i { font-style: normal; color: var(--accent); }
 .stamp { font-size: 12px; color: var(--muted); text-align: right; min-width: 0; }
 .chips { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
 .chips::-webkit-scrollbar { display: none; }
-.mchip { flex: 0 0 auto; border: 1.5px solid var(--line); background: var(--card); border-radius: 12px; padding: 7px 12px; text-align: left; min-height: 48px; }
+.mchip { flex: 0 0 auto; border: 1.5px solid var(--line); background: var(--card); border-radius: 7px; padding: 7px 12px; text-align: left; min-height: 48px; }
 .mchip b { display: block; font-family: var(--head); font-size: 17px; font-weight: 600; white-space: nowrap; }
 .mchip small { color: var(--muted); font-size: 12px; }
 .mchip[aria-pressed="true"] { background: var(--pitch); color: var(--pitch-ink); border-color: var(--pitch); }
 .mchip[aria-pressed="true"] small { color: inherit; opacity: .75; }
-.scoreboard { background: var(--pitch); color: var(--pitch-ink); border-radius: 16px; padding: 16px; margin: 14px 0 12px; }
+.scoreboard { background: var(--pitch); color: var(--pitch-ink); border-radius: 9px; padding: 16px; margin: 14px 0 12px; }
 .scoreboard .sx { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; opacity: .75; }
 .teams { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; margin: 6px 0 8px; }
 .teams .t { font-family: var(--head); font-weight: 700; font-size: 26px; line-height: 1.05; min-width: 0; overflow-wrap: anywhere; }
@@ -48,15 +60,19 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .coaches { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.2); font-weight: 600; font-size: 16px; }
 .coaches span { display: block; font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; opacity: .7; }
 .tabs { display: flex; gap: 6px; margin: 0 0 12px; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 78px); z-index: 10; background: var(--bg); padding: 6px 0; }
-.tab { flex: 1 1 0; min-width: 0; border: 0; background: var(--card); border: 1.5px solid var(--line); border-radius: 10px; padding: 6px 4px; font-weight: 600; font-size: 13px; line-height: 1.1; min-height: 46px; overflow-wrap: anywhere; }
+.tab { flex: 1 1 0; min-width: 0; border: 0; background: var(--card); border: 1.5px solid var(--line); border-radius: 6px; padding: 6px 4px; font-weight: 600; font-size: 13px; line-height: 1.1; min-height: 46px; overflow-wrap: anywhere; }
 .tab[aria-selected="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
-.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px; margin-bottom: 12px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 14px; margin-bottom: 12px; }
 .card h3 { font-size: 20px; margin-bottom: 8px; }
 .lab { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; margin-bottom: 4px; }
 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .facts p { margin: 0 0 8px; } .facts p:last-child { margin: 0; }
-.formrow { display: flex; gap: 8px; flex-wrap: wrap; }
-.fm { border: 0; border-radius: 10px; padding: 6px 10px; min-height: 44px; color: #fff; font-weight: 700; font-size: 14px; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.1; }
+.formrow { display: flex; gap: 8px; flex-wrap: nowrap; overflow-x: scroll; -webkit-overflow-scrolling: touch; padding-bottom: 10px; width: 100%; min-width: 0; scrollbar-width: thin; }
+.formrow .fm { flex: 0 0 auto; width: auto; min-width: 84px; white-space: nowrap; }
+.formrow .fm small { white-space: nowrap; }
+.fm { cursor: pointer; font-family: inherit; border: 0; border-radius: 6px; padding: 6px 10px; min-height: 44px; color: #fff; font-weight: 700; font-size: 14px; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.1; }
+.fmbar { flex: 0 0 auto; align-self: center; font-size: 26px; color: var(--muted, #8a8f98); padding: 0 2px; }
+.fmsea { flex: 0 0 auto; align-self: center; font-size: 12px; font-weight: 600; color: var(--muted, #8a8f98); white-space: nowrap; }
 .fm small { font-weight: 500; font-size: 11px; opacity: .9; }
 .fm.W { background: var(--win); } .fm.G { background: var(--draw); } .fm.V { background: var(--loss); }
 .stand { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
@@ -65,35 +81,35 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .stand td:nth-child(1), .stand th:nth-child(1) { text-align: left; width: 22px; }
 .stand td:nth-child(2), .stand th:nth-child(2) { text-align: left; }
 .stand tr.me td { background: var(--hi); font-weight: 600; }
-.search { width: 100%; font: inherit; padding: 12px 14px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); margin-bottom: 10px; min-height: 48px; }
+.search { width: 100%; font: inherit; padding: 12px 14px; border-radius: 7px; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); margin-bottom: 10px; min-height: 48px; }
 .roster { list-style: none; margin: 0; padding: 0; }
-.prow { width: 100%; display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; align-items: center; text-align: left; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; margin-bottom: 8px; min-height: 52px; }
+.prow { width: 100%; display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; align-items: center; text-align: left; background: var(--card); border: 1px solid var(--line); border-radius: 7px; padding: 10px 12px; margin-bottom: 8px; min-height: 52px; }
 .prow .nr { font-family: var(--head); font-weight: 700; font-size: 22px; color: var(--muted); text-align: center; }
 .prow .nm { font-weight: 600; min-width: 0; overflow-wrap: anywhere; }
 .prow .gl { font-family: var(--head); font-weight: 700; font-size: 22px; min-width: 24px; text-align: right; }
 .prow .gl.zero { color: var(--muted); font-weight: 600; }
-.bdg { display: inline-block; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 6px; background: var(--line); color: var(--ink); margin-left: 6px; vertical-align: 2px; }
+.bdg { display: inline-block; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; background: var(--line); color: var(--ink); margin-left: 6px; vertical-align: 2px; }
 .bdg.c { background: var(--accent); color: var(--accent-ink); } .bdg.inj { background: var(--loss); color: #fff; }
-.cd { display: inline-block; width: 9px; height: 13px; border-radius: 2px; margin-left: 5px; vertical-align: -1px; }
+.cd { display: inline-block; width: 9px; height: 13px; border-radius: 3px; margin-left: 5px; vertical-align: -1px; }
 .ev { display: grid; grid-template-columns: 38px 1fr; gap: 8px; padding: 7px 0; border-top: 1px solid var(--line); }
 .ev:first-child { border-top: 0; } .ev b { font-family: var(--head); font-size: 18px; }
 .sheetbg { position: fixed; inset: 0; background: var(--sheet-shade); z-index: 40; display: none; }
 .sheetbg.on { display: block; }
-.sheet { position: absolute; left: 0; right: 0; bottom: 0; max-height: 88vh; overflow-y: auto; background: var(--bg); border-radius: 18px 18px 0 0; padding: 14px max(16px, env(safe-area-inset-left, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)); max-width: 640px; margin: 0 auto; -webkit-overflow-scrolling: touch; }
+.sheet { position: absolute; left: 0; right: 0; bottom: 0; max-height: 88vh; overflow-y: auto; background: var(--bg); border-radius: 10px 10px 0 0; padding: 14px max(16px, env(safe-area-inset-left, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)); max-width: 640px; margin: 0 auto; -webkit-overflow-scrolling: touch; }
 .sheet .grab { width: 44px; height: 5px; border-radius: 3px; background: var(--line); margin: 0 auto 10px; }
 .sheet h2 { font-size: 30px; line-height: 1.05; }
-.close { position: sticky; top: 0; float: right; border: 1.5px solid var(--line); background: var(--card); border-radius: 10px; min-width: 44px; min-height: 44px; font-size: 20px; }
+.close { position: sticky; top: 0; float: right; border: 1.5px solid var(--line); background: var(--card); border-radius: 6px; min-width: 44px; min-height: 44px; font-size: 20px; }
 .blocks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0; }
-.blk { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 8px 6px; text-align: center; }
+.blk { background: var(--card); border: 1px solid var(--line); border-radius: 7px; padding: 8px 6px; text-align: center; }
 .blk b { display: block; font-family: var(--head); font-size: 28px; line-height: 1.05; }
 .blk small { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
-.line { background: var(--card); border-left: 4px solid var(--accent); padding: 8px 12px; border-radius: 0 10px 10px 0; margin-bottom: 8px; }
+.line { background: var(--card); border-left: 4px solid var(--accent); padding: 8px 12px; border-radius: 0 6px 6px 0; margin-bottom: 8px; }
 .line mark { background: var(--hi); color: inherit; padding: 0 2px; border-radius: 3px; }
 .src { font-size: 12px; color: var(--muted); }
 .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 15; background: var(--bg); border-top: 1px solid var(--line); display: flex; gap: 8px; padding: 8px max(16px, env(safe-area-inset-left, 0px)) calc(8px + env(safe-area-inset-bottom, 0px)); }
-.bar button, .btn { flex: 1 1 0; min-height: 46px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--card); font-weight: 600; }
+.bar button, .btn { flex: 1 1 0; min-height: 46px; border-radius: 7px; border: 1.5px solid var(--line); background: var(--card); font-weight: 600; }
 .btn.pri { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
-.note { background: var(--card); border: 1px dashed var(--line); border-radius: 12px; padding: 12px; margin: 14px 0; font-size: 14px; }
+.note { background: var(--card); border: 1px dashed var(--line); border-radius: 7px; padding: 12px; margin: 14px 0; font-size: 14px; }
 .note.err { border-color: var(--loss); }
 .empty { text-align: center; padding: 40px 8px; color: var(--muted); }
 .empty h2 { color: var(--ink); font-size: 28px; margin-bottom: 8px; }
@@ -101,6 +117,7 @@ input[type=file] { display: none; }
 .sub { color: var(--muted); font-size: 14px; }
 @media (max-width: 360px) { .teams .t { font-size: 16px; } .teams .sc { font-size: 26px; } }
 .bt { color: var(--muted); font-weight: 500; font-size: 12px; margin-left: 6px; white-space: nowrap; }
+.bdg.sel { display: inline-flex; align-items: center; justify-content: center; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; background: #f07a1a; color: #fff; font-size: 10.5px; }
 .bdg.star { background: var(--hi); color: var(--ink, inherit); }
 .bio { margin: 10px 0 4px; }
 .bio .row { display: grid; grid-template-columns: 96px 1fr; gap: 8px; padding: 6px 0; border-top: 1px solid var(--line); }
@@ -110,32 +127,32 @@ input[type=file] { display: none; }
 .prow .mid { min-width: 0; display: block; }
 .prow .l1 { display: block; font-weight: 600; overflow-wrap: anywhere; }
 .prow .l2 { display: block; font-size: 13px; color: var(--muted); margin-top: 1px; }
-.prow .l3 { display: block; font-size: 13px; margin-top: 3px; color: var(--ink); background: var(--hi); border-radius: 6px; padding: 2px 6px; overflow-wrap: anywhere; }
+.prow .l3 { display: block; font-size: 13px; margin-top: 3px; color: var(--ink); background: var(--hi); border-radius: 3px; padding: 2px 6px; overflow-wrap: anywhere; }
 .prow .st { display: flex; align-items: center; gap: 5px; padding-top: 2px; }
 .gc { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; height: 26px; border-radius: 13px; background: var(--ink); color: var(--bg); font-family: var(--head); font-weight: 700; font-size: 16px; padding: 0 4px; }
-.kc { display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 24px; border-radius: 4px; font-weight: 700; font-size: 12px; padding: 0 3px; color: #fff; }
-.kc.g { background: #3d8b57; } .kc.y { background: #e0a800; color: #1b1b1b; } .kc.r { background: #c0392b; }
+.kc { display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 24px; border-radius: 3px; font-weight: 700; font-size: 12px; padding: 0 3px; color: #fff; }
+.kc.g { background: #3f7d4f; } .kc.y { background: #e0a800; color: #1b1b1b; } .kc.r { background: #c0563a; }
 .fchips { display: flex; gap: 8px; overflow-x: auto; margin: 0 0 10px; padding-bottom: 2px; scrollbar-width: none; }
 .fchips::-webkit-scrollbar { display: none; }
-.fc { flex: 0 0 auto; border: 1.5px solid var(--line); background: var(--card); border-radius: 999px; padding: 6px 12px; font-weight: 600; font-size: 14px; min-height: 40px; }
+.fc { flex: 0 0 auto; border: 1.5px solid var(--line); background: var(--card); border-radius: 10px; padding: 6px 12px; font-weight: 600; font-size: 14px; min-height: 40px; }
 .fc[aria-pressed="true"] { background: var(--pitch); color: var(--pitch-ink); border-color: var(--pitch); }
 .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 0 0 12px; }
-.tile { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 8px 4px; text-align: center; }
+.tile { background: var(--card); border: 1px solid var(--line); border-radius: 7px; padding: 8px 4px; text-align: center; }
 .tile b { display: block; font-family: var(--head); font-size: 26px; line-height: 1.05; }
 .tile small { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
-.stars { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; padding: 10px 12px; margin: 0 0 12px; }
+.stars { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 7px; padding: 10px 12px; margin: 0 0 12px; }
 .stars button { display: block; width: 100%; text-align: left; background: none; border: 0; padding: 7px 0; border-top: 1px solid var(--line); min-height: 44px; }
 .stars button:first-of-type { border-top: 0; }
 .stars button b { font-family: var(--head); font-size: 18px; margin-right: 6px; }
-.cdot { display: inline-block; width: 11px; height: 15px; border-radius: 2px; vertical-align: -2px; margin-left: 6px; }
-.cdot.g { background: #3d8b57; } .cdot.y { background: #e0a800; } .cdot.r { background: #c0392b; }
+.cdot { display: inline-block; width: 11px; height: 15px; border-radius: 3px; vertical-align: -2px; margin-left: 6px; }
+.cdot.g { background: #3f7d4f; } .cdot.y { background: #e0a800; } .cdot.r { background: #c0563a; }
 .coaches small.cc { display: inline; font-size: 12px; font-weight: 600; opacity: .95; letter-spacing: 0; text-transform: none; margin-left: 2px; }
 .msr { display: grid; grid-template-columns: 84px 1fr; gap: 8px; padding: 8px 0; border-top: 1px solid var(--line); }
 .msr:first-of-type { border-top: 0; }
 .msr .d { color: var(--muted); font-size: 13px; }
 .msr .g { font-size: 14px; color: var(--muted); }
 .nav { display: flex; gap: 8px; margin-top: 16px; }
-.nav button { flex: 1 1 0; min-height: 48px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--card); font-weight: 600; }
+.nav button { flex: 1 1 0; min-height: 48px; border-radius: 7px; border: 1.5px solid var(--line); background: var(--card); font-weight: 600; }
 .nav button:disabled { opacity: .35; }
 details.card > summary { cursor: pointer; font-weight: 600; min-height: 32px; }
 
@@ -156,8 +173,12 @@ details.card > summary { cursor: pointer; font-weight: 600; min-height: 32px; }
 .coaches { font-size: 13px; }
 .cdot { width: 9px; height: 13px; margin-left: 5px; }
 .cdw { white-space: nowrap; }
-.top { position: static; }
-.tabs { top: env(safe-area-inset-top, 0px); padding: 8px 0 6px; }
+.top { position: sticky; top: env(safe-area-inset-top, 0px); }
+.tabs { top: calc(env(safe-area-inset-top, 0px) + var(--topH, 0px)); padding: 8px 0 6px; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
+.clab { font-family: var(--head); font-weight: 700; font-size: 22px; margin: 2px 2px 6px; display: flex; justify-content: space-between; align-items: baseline; }
+.clab span { font-family: var(--body); font-size: 13px; font-weight: 600; color: var(--muted); }
+@media (min-width: 900px) { .wrap { max-width: 1180px; } .tabs { display: flex; } .tab { flex: 0 0 auto; padding: 8px 26px; } }
 .sumline { font-size: 14px; color: var(--muted); margin: 0 0 8px; display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
 .sumline b { color: var(--ink); font-family: var(--head); font-size: 20px; margin-right: 2px; }
 .sumline .cdot { margin-left: 8px; }
@@ -167,8 +188,110 @@ details.card > summary { cursor: pointer; font-weight: 600; min-height: 32px; }
 .coaches > div { display: block; text-align: left !important; margin-bottom: 2px; font-weight: 600; }
 .coaches span { display: inline; font-size: 11px; margin-right: 6px; }
 .scoreboard .sx { font-size: 11px; }
+
+/* iPad en brede schermen */
+.scoreboard .teams { grid-template-columns: auto auto auto; justify-content: center; gap: 18px; }
+.scoreboard .teams .t, .scoreboard .teams .t:last-child { text-align: center; }
+@media (min-width: 700px) {
+  .teams .t { font-size: 26px; } .teams .sc { font-size: 40px; }
+  .coaches { display: flex; justify-content: center; gap: 36px; }
+  .scoreboard .sx, .scoreboard .meta { justify-content: center; text-align: center; }
+  .prow { min-height: 56px; } .fc, .mchip, .tab { min-height: 48px; }
+}
+@media (min-width: 900px) { .wrap { max-width: 1100px; } }
+
+.prow { align-items: center; }
+.prow .st { padding-top: 0; }
+.prow .nr { align-self: center; }
+
+.infotop, .infofacts { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 16px; align-items: start; }
+.infotop > *, .infofacts > * { min-width: 0; }
+.formrow { touch-action: pan-x pan-y; }
+@media (min-width: 700px) { .infotop, .infofacts { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.mchip { position: relative; padding-right: 34px; }
+.mx { position: absolute; top: 5px; right: 5px; width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 16px; line-height: 1; opacity: .6; }
+.mx:hover { opacity: 1; background: rgba(128,128,128,.3); }
+.sheetbg.center { align-items: center; justify-content: center; padding: 16px; }
+.sheetbg.center.on { display: flex; }
+.sheetbg.center .sheet { position: relative; left: auto; right: auto; bottom: auto; width: 100%; max-width: 520px; max-height: 84vh; border-radius: 10px; margin: 0; padding-bottom: 20px; }
+
+/* ===== iPad landscape (vanaf 900px breed) ===== */
+body.w { padding: 0 max(14px, env(safe-area-inset-left, 0px)) 0 max(14px, env(safe-area-inset-right, 0px)); overflow: hidden; font-size: 15px; line-height: 1.35; }
+body.w .wrap { max-width: none; margin: 0; }
+body.w .bar, body.w::before { display: none; }
+.W { display: flex; flex-direction: column; height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); min-height: 0; }
+.top2 { flex: none; padding: 7px 0; border-bottom: 1px solid var(--line); }
+.r1 { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.r1 .bl { flex: none; margin-right: 4px; line-height: 1.1; }
+.r1 .brand { font-size: 18px; margin: 0; }
+.r1 .stamp { font-size: 10.5px; text-align: left; margin: 2px 0 0; white-space: nowrap; }
+.r1 .chips { flex: 1 1 0; min-width: 0; margin: 0 4px; padding-bottom: 0; }
+.r1 .hbtn, .r1 .mchip { flex: none; }
+.top2 .hbtn { min-height: 34px; padding: 3px 13px; font-size: 13.5px; }
+.top2 .hbtn.pri { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.top2 .mchip { min-height: 38px; padding: 2px 28px 2px 10px; }
+.top2 .mchip b { font-size: 14px; }
+.top2 .mchip small { font-size: 10.5px; }
+.W .note { margin: 8px 0 0; padding: 8px 12px; font-size: 13px; }
+.main3 { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) clamp(330px, 31vw, 450px); gap: 0 14px; padding: 8px 0 8px; }
+.rost { grid-column: 1 / 3; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); gap: 0 14px; min-height: 0; }
+.rtools { grid-column: 1 / 3; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 0 0 6px; }
+.rtools .sumline { margin: 0; font-size: 13px; flex: 1; }
+.rtools .sumline b { font-size: 17px; }
+.rtools .fchips { margin: 0; overflow: visible; }
+.rtools .fc { min-height: 30px; padding: 2px 11px; font-size: 13px; border-radius: 8px; }
+.pane { min-height: 0; display: flex; flex-direction: column; }
+.ph { flex: none; display: flex; align-items: baseline; justify-content: space-between; gap: 8px; padding: 0 3px 5px; }
+.ph b { font: 700 18px var(--head); }
+.ph span { font-size: 12.5px; color: var(--muted); text-align: right; }
+.pbody { flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-right: 2px; }
+.roster2 { list-style: none; margin: 0; padding: 0; }
+.prow2 { width: 100%; display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; gap: 8px; align-items: center; text-align: left; background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 0 10px 0 6px; min-height: 33px; margin-bottom: 3px; }
+.prow2.on { border-color: var(--accent); background: var(--hi); }
+.prow2 .nr { font: 700 16px var(--head); color: var(--muted); text-align: center; }
+.prow2 .mid { display: flex; align-items: center; gap: 7px; min-width: 0; }
+.prow2 .l1 { font-weight: 600; font-size: 14.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 0 1 auto; }
+.prow2 .bd { flex: none; white-space: nowrap; }
+.prow2 .bd .bdg { margin-left: 3px; }
+.prow2 .l2 { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; flex: 1 1 0; }
+.prow2 .st { display: flex; align-items: center; gap: 4px; }
+.prow2 .gc { min-width: 22px; height: 22px; font-size: 14px; border-radius: 11px; }
+.prow2 .kc { height: 20px; min-width: 18px; font-size: 11px; }
+.side { min-height: 0; display: flex; flex-direction: column; border-left: 1px solid var(--line); padding-left: 14px; }
+.sbs.scoreboard { flex: none; margin: 0 0 8px; padding: 9px 12px 10px; border-radius: 8px; }
+.sbs .sx { font-size: 11px; text-align: center; }
+.sbs .sbt { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 10px; margin: 3px 0 2px; }
+.sbs .sbt .t { font: 700 16px/1.1 var(--head); }
+.sbs .sbt .t:first-child { text-align: right; }
+.sbs .sbt .sc { font: 700 28px var(--head); }
+.sbs .meta { font-size: 12px; justify-content: center; text-align: center; gap: 0 10px; }
+.sbs .coaches { margin-top: 6px; padding-top: 6px; font-size: 12px; justify-content: center; flex-wrap: wrap; gap: 2px 14px; }
+.stabs { flex: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin: 0 0 8px; }
+.stab { min-height: 36px; border: 1.5px solid var(--line); background: var(--card); border-radius: 6px; font-weight: 600; font-size: 13px; }
+.stab[aria-selected="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.sbody, .pside { flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.side .card { padding: 10px 12px; margin-bottom: 8px; }
+.side .card h3 { font-size: 17px; margin-bottom: 6px; }
+.side .formrow { flex-wrap: wrap; overflow: visible; max-width: none !important; padding-bottom: 0; gap: 6px; align-items: flex-start; align-content: flex-start; height: auto; }
+.side .fm { height: auto; align-self: flex-start; min-width: 0; padding: 3px 8px; min-height: 38px; font-size: 13px; }
+.side .fm small { font-size: 10.5px; }
+.side .fmbar { display: none; }
+.side .fmsea { flex-basis: 100%; margin-top: 2px; }
+.stand.s2 { font-size: 13px; }
+.stand.s2 th { font-size: 11px; padding: 3px 3px; }
+.stand.s2 td { padding: 5px 3px; }
+.stand.s2 td:nth-child(2) { white-space: nowrap; }
+.pside .grab { display: none; }
+.pside h2 { font-size: 24px; }
+.pside .nav { position: sticky; bottom: 0; background: var(--bg); padding: 8px 0 2px; margin-top: 10px; }
+.pside .nav button { min-height: 42px; }
+.stcols { display: block; }
+@media (min-width: 900px) {
+  .stcols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 28px; align-items: start; }
+  body.w .sheetbg.center .sheet.wide { max-width: min(1180px, 96vw); max-height: 92vh; }
+  body.w .sheetbg.center .sheet { max-height: 90vh; }
+}
 </style>
-</head><body>
 
 <div class="wrap" id="app"></div>
 <div class="sheetbg" id="sheetbg"><div class="sheet" id="sheet" role="dialog" aria-modal="true"></div></div>
@@ -184,8 +307,21 @@ details.card > summary { cursor: pointer; font-weight: 600; min-height: 32px; }
   var $ = function (id) { return document.getElementById(id); };
   var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
   var KEY = "has-telefoon-v1";
-  var S = { needKey: false, data: null, from: "", stamp: "", sel: null, tab: "h", status: "", err: "", busy: false, q: "", flt: "all", list: [] };
+  var S = { needKey: false, order: loadOrder(), reorder: false, hidden: loadHidden(), data: null, from: "", stamp: "", sel: null, tab: "h", status: "", err: "", busy: false, q: "", flt: "all", list: [], stab: "vorm", pl: null, formAll: false };
 
+  function loadOrder() { try { return JSON.parse(localStorage.getItem("has-live-order") || "[]"); } catch (e) { return []; } }
+  function saveOrder() { try { localStorage.setItem("has-live-order", JSON.stringify(S.order)); } catch (e) { } }
+  function ordered() {
+    var ms = (S.data && S.data.matches) || [], ix = function (m) { var i = S.order.indexOf(m.fixture.id); return i < 0 ? 1e6 : i; };
+    return ms.map(function (m, k) { return [m, k]; }).sort(function (a, b) { return (ix(a[0]) - ix(b[0])) || (a[1] - b[1]); }).map(function (a) { return a[0]; });
+  }
+  function moveMatch(id, dir) {
+    var ids = ordered().map(function (m) { return m.fixture.id; }), i = ids.indexOf(id), j = i + dir;
+    if (i < 0 || j < 0 || j >= ids.length) return;
+    var t = ids[i]; ids[i] = ids[j]; ids[j] = t; S.order = ids; saveOrder(); render();
+  }
+  function loadHidden() { try { return JSON.parse(localStorage.getItem("has-live-hidden") || "[]"); } catch (e) { return []; } }
+  function saveHidden() { try { localStorage.setItem("has-live-hidden", JSON.stringify(S.hidden)); } catch (e) { } }
   function store(get, val) { try { return get ? localStorage.getItem(KEY) : localStorage.setItem(KEY, val); } catch (e) { return null; } }
   function nice(d) { if (!d) return ""; var m = String(d).match(/^(\d{4})-(\d\d)-(\d\d)/); if (!m) return d; var dt = new Date(+m[1], +m[2] - 1, +m[3]); return dt.toLocaleDateString("nl-NL", { weekday: "short", day: "numeric", month: "short" }); }
   function short(club) { return club; }
@@ -210,7 +346,7 @@ details.card > summary { cursor: pointer; font-weight: 600; min-height: 32px; }
     S.data = json; S.from = from; S.stamp = stamp || json.gemaakt || "";
     if (!S.sel || !json.matches.some(function (m) { return m.fixture.id === S.sel; })) {
       var today = new Date().toISOString().slice(0, 10);
-      var next = json.matches.find(function (m) { return m.fixture.date >= today; }) || json.matches[0];
+      var vis = json.matches.filter(function (m) { return S.hidden.indexOf(m.fixture.id) < 0; }); var next = vis.find(function (m) { return m.fixture.date >= today; }) || vis[0] || json.matches[0];
       S.sel = next ? next.fixture.id : null;
     }
   }
@@ -253,6 +389,13 @@ details.card > summary { cursor: pointer; font-weight: 600; min-height: 32px; }
     return '<div class="card" style="margin-top:16px"><h3>HAS Live</h3><div class="sub" style="margin-bottom:10px">Vul je wachtwoord in.</div><input class="search" id="pw" type="password" autocomplete="current-password" placeholder="Wachtwoord"><button class="btn pri" id="pwGo" style="width:100%">Openen</button></div>';
   }
 
+  function logout() { setKey(""); S.data = null; try { localStorage.removeItem(KEY); } catch (e) { } S.needKey = true; S.pl = null; render(); }
+  function bindKeyForm() {
+    var pg = $("pwGo"); if (!pg) return;
+    pg.onclick = function () { var v = $("pw").value.trim(); if (v) { setKey(v); S.needKey = false; S.err = ""; fromDrive(); } };
+    $("pw").onkeydown = function (e) { if (e.key === "Enter") pg.click(); };
+  }
+
   function fromFile(file) {
     var r = new FileReader();
     r.onload = function () {
@@ -276,8 +419,8 @@ details.card > summary { cursor: pointer; font-weight: 600; min-height: 32px; }
   function header() {
     var d = S.data;
     return '<div class="top"><div class="brandrow"><div class="brand">HAS<i>.</i>LIVE</div><div class="stamp">' + stampText() + '</div></div>' +
-      (d && d.matches.length ? '<div class="chips" role="tablist">' + d.matches.map(function (m) {
-        return '<button class="mchip" data-m="' + m.fixture.id + '" aria-pressed="' + (m.fixture.id === S.sel) + '"><b>' + esc(matchLabel(m)) + '</b><small>' + esc(nice(m.fixture.date)) + (m.fixture.time ? " · " + esc(m.fixture.time) : "") + (m.fixture.sex === "H" ? " · heren" : " · dames") + '</small></button>';
+      (d && d.matches.length ? '<div class="hbar"><button class="hbtn" id="bStand">Stand</button><button class="hbtn" id="bTops">Topscorers</button><button class="hbtn" id="bOrder" aria-pressed="' + S.reorder + '">Volgorde</button></div><div class="chips" role="tablist">' + ordered().filter(function (m) { return S.hidden.indexOf(m.fixture.id) < 0; }).map(function (m) {
+        return '<button class="mchip" data-m="' + m.fixture.id + '" aria-pressed="' + (m.fixture.id === S.sel) + '">' + (S.reorder ? '<span class="mv"><span role="button" data-mv="' + m.fixture.id + '" data-dir="-1" title="Naar links">&lsaquo;</span><span role="button" data-mv="' + m.fixture.id + '" data-dir="1" title="Naar rechts">&rsaquo;</span></span>' : '<span class="mx" data-hide="' + m.fixture.id + '" role="button" title="Uit beeld halen">&times;</span>') + '<b>' + esc(matchLabel(m)) + '</b><small>' + esc(nice(m.fixture.date)) + (m.fixture.time ? " · " + esc(m.fixture.time) : "") + (m.fixture.sex === "H" ? " · heren" : " · dames") + '</small></button>';
       }).join("") + '</div>' : "") + '</div>';
   }
   function notes() {
@@ -285,7 +428,7 @@ details.card > summary { cursor: pointer; font-weight: 600; min-height: 32px; }
   }
 
   function empty() {
-    return '<div class="empty"><h2>Nog geen wedstrijden</h2><p>Klik in HAS op Zet op telefoon. Daarna staat de wedstrijd hier.</p></div>';
+    return '<div class="empty"><h2>Nog geen wedstrijden</h2><p>Haal het bestand HAS-telefoon.json op uit je Google Drive, of kies het bestand zelf. Maak het bestand op je Mac in HAS, bij Ik volg, met de knop Zet op telefoon.</p></div>';
   }
 
   function coachRow(m) {
@@ -300,25 +443,49 @@ details.card > summary { cursor: pointer; font-weight: 600; min-height: 32px; }
     var sh = m.sheet || {};
     return '<div class="scoreboard"><div class="sx">' + (f.sex === "H" ? "Heren" : "Dames") + (f.round ? " · ronde " + esc(f.round) : "") + '</div>' +
       '<div class="teams"><div class="t">' + esc(f.home) + '</div><div class="sc">' + (played ? esc(f.gh) + "-" + esc(f.ga) : "–") + '</div><div class="t">' + esc(f.away) + '</div></div>' +
-      '<div class="meta"><span>' + esc(nice(f.date)) + (f.time ? " " + esc(f.time) : "") + '</span>' + (sh.venue || f.venue ? '<span>' + esc(sh.venue || f.venue) + '</span>' : "") + '</div>' + coachRow(m) + '</div>';
+      '<div class="meta"><span>' + esc(nice(f.date)) + (f.time ? " " + esc(f.time) : "") + '</span>' + (sh.venue || f.venue ? '<span>' + esc(sh.venue || f.venue) + '</span>' : "") + '</div>' + (sh.referees ? '<div class="meta" style="margin-top:2px"><span>Scheidsrechters: ' + esc(refsOnly(sh.referees)) + '</span></div>' : "") + coachRow(m) + '</div>';
   }
 
-  function formBlock(m, i) {
+  function fitRows() {
+    document.querySelectorAll(".formrow").forEach(function (r) {
+      var ch = r.querySelectorAll(".fm"); if (!ch.length) return;
+      var last = ch[Math.min(4, ch.length - 1)];
+      r.style.maxWidth = Math.ceil(last.offsetLeft + last.offsetWidth - r.firstElementChild.offsetLeft + 2) + "px";
+    });
+  }
+  function selBadges(b) { return ((b && b.sel) || []).map(function (x) { return '<span class="bdg sel" title="' + esc(x.tip) + '">' + esc(x.t) + '</span>'; }).join(""); }
+  function isNL(n) { return /^\s*nederland(s|se)?\s*$/i.test(n || ""); }
+  function shortSea(x) { return String(x || "").replace(/^\d{2}(\d{2})\s*[\/-]\s*(?:\d{2})?(\d{2})$/, "$1-$2"); }
+  function formChipsHtml(fm, sd, sex) {
+    var out = "", last = null;
+    fm.forEach(function (x) {
+      var sn = x.season || "";
+      if (sn !== last) { out += (last === null ? "" : '<span class="fmbar">|</span>') + '<span class="fmsea">' + esc(shortSea(sn)) + (x.nodate ? " \u00b7 A-Z" : "") + '</span>'; last = sn; }
+      if (x.nodate) { out += '<span class="fm ' + esc(x.res) + '" style="cursor:default">' + esc(x.gf) + "-" + esc(x.ga) + '<small>' + (x.home ? "" : "uit ") + esc(x.opponent) + '</small></span>'; return; }
+      out += '<button class="fm ' + esc(x.res) + '" data-fm="' + esc(x.id) + '" data-club="' + esc(sd.club) + '" data-sex="' + esc(sex) + '">' + esc(x.gf) + "-" + esc(x.ga) + '<small>' + (x.home ? "" : "uit ") + esc(x.opponent) + '</small></button>';
+    });
+    return out;
+  }
+  function formBlock(m, i, lim) {
     var sd = m.sides[i]; if (!sd) return "";
-    var fm = (sd.form || []).slice().reverse();
+    var fm = (sd.form || []).slice().reverse(); if (lim && !S.formAll) fm = fm.slice(0, lim);
     return '<div class="card"><h3>' + esc(sd.club) + '</h3>' +
       (sd.coach ? '<div class="sub">Coach: ' + esc(sd.coach.name || sd.coach) + '</div>' : "") +
-      '<div class="lab" style="margin-top:10px">Vorm (nieuwste eerst)</div>' +
-      (fm.length ? '<div class="formrow">' + fm.map(function (x) { return '<div class="fm ' + esc(x.res) + '">' + esc(x.gf) + "-" + esc(x.ga) + '<small>' + (x.home ? "" : "uit ") + esc(x.opponent) + '</small></div>'; }).join("") + '</div>' : '<div class="sub">Nog geen gespeelde wedstrijden.</div>') +
+      '<div class="lab" style="margin-top:10px">Vorm (nieuwste eerst, alle seizoenen)</div>' +
+      (fm.length ? '<div class="formrow">' + formChipsHtml(fm, sd, m.fixture.sex) + '</div>' : '<div class="sub">Nog geen gespeelde wedstrijden.</div>') +
       (sd.history && sd.history.length ? '<div class="lab" style="margin-top:10px">Vorige seizoenen</div><div class="sub">' + sd.history.map(function (h) { return esc(h.season) + ": " + esc(h.pos) + "e"; }).join(" · ") + '</div>' : "") +
       ((sd.new || []).length ? '<div class="lab" style="margin-top:10px">Nieuw</div><div class="sub">' + sd.new.map(function (n) { return esc(n.name || n); }).join(", ") + '</div>' : "") +
       '</div>';
   }
+  function nz(v) { return v == null ? 0 : v; }
+  function dsOf(r) { var x = r.ds != null ? r.ds : nz(r.dv) - nz(r.dt); return (x > 0 ? "+" : "") + x; }
+  var STAND_HEAD = '<thead><tr><th>#</th><th>Club</th><th>Gesp</th><th>W</th><th>G</th><th>V</th><th>Pnt</th><th>DV</th><th>DT</th><th>DS</th></tr></thead>';
+  function standRow(r, me) { return '<tr' + (me ? ' class="me"' : "") + '><td>' + esc(r.pos) + '</td><td>' + esc(r.club) + '</td><td>' + esc(r.g) + '</td><td>' + esc(nz(r.w)) + '</td><td>' + esc(nz(r.gl)) + '</td><td>' + esc(nz(r.v)) + '</td><td><b>' + esc(r.p) + '</b></td><td>' + esc(r.dv) + '</td><td>' + esc(r.dt) + '</td><td>' + dsOf(r) + '</td></tr>'; }
   function standBlock(m) {
     var st = m.standing || []; if (!st.length) return "";
     var f = m.fixture, keys = [norm(f.home), norm(f.away)];
-    return '<div class="card"><h3>Stand</h3><div style="overflow-x:auto"><table class="stand"><thead><tr><th>#</th><th>Club</th><th>Gesp</th><th>Pnt</th><th>DV</th><th>DT</th></tr></thead><tbody>' +
-      st.map(function (r) { var me = keys.indexOf(norm(r.club)) >= 0; return '<tr' + (me ? ' class="me"' : "") + '><td>' + esc(r.pos) + '</td><td>' + esc(r.club) + '</td><td>' + esc(r.g) + '</td><td>' + esc(r.p) + '</td><td>' + esc(r.dv) + '</td><td>' + esc(r.dt) + '</td></tr>'; }).join("") + '</tbody></table></div></div>';
+    return '<div class="card"><h3>Stand ' + (f.sex === "H" ? "heren" : "dames") + '</h3><div style="overflow-x:auto"><table class="stand stand-full">' + STAND_HEAD + '<tbody>' +
+      st.map(function (r) { return standRow(r, keys.indexOf(norm(r.club)) >= 0); }).join("") + '</tbody></table></div></div>';
   }
   function factsBlock(m) {
     var v = m.verslag; if (!v) return "";
@@ -342,12 +509,14 @@ details.card > summary { cursor: pointer; font-weight: 600; min-height: 32px; }
     return w.length ? '<details class="card"><summary><b>Let op (' + w.length + ')</b></summary><div class="sub" style="margin-top:8px">' + w.map(function (x) { return '<p>' + esc(x) + '</p>'; }).join("") + '</div></details>' : "";
   }
 
+  function refsOnly(x) { return String(x).replace(/[.\s]*(Wedstrijdofficials?|Scheidscoach|Officialscoach|Beoordelaar)\s*:.*$/i, "").replace(/\s*\((federal|match official)\)/g, "").trim(); }
   function refsBlock(m) {
     var r = (m.sheet || {}).referees; if (!r) return "";
-    return '<div class="card"><div class="lab">Scheidsrechters</div><div>' + esc(String(r).replace(/\s*\((federal|match official)\)/g, "")) + '</div></div>';
+    return '<div class="card"><div class="lab">Scheidsrechters</div><div>' + esc(refsOnly(r)) + '</div></div>';
   }
   function tabOverview(m) {
-    return refsBlock(m) + factsBlock(m) + '<div class="two">' + formBlock(m, 0) + formBlock(m, 1) + '</div>' + standBlock(m) + eventsBlock(m) + warn(m);
+    return '<div class="infotop">' + formBlock(m, 0) + formBlock(m, 1) + '</div>' +
+      '<div class="infofacts">' + factsBlock(m) + '</div>' + standBlock(m) + refsBlock(m) + eventsBlock(m) + warn(m);
   }
 
   function teamNews(m, i) {
@@ -370,7 +539,7 @@ details.card > summary { cursor: pointer; font-weight: 600; min-height: 32px; }
     if (!b) return "";
     var parts = [];
     if (b.age != null) parts.push(b.age + " jr");
-    if (b.nat) parts.push(b.nat);
+    if (b.nat && !isNL(b.nat)) parts.push(b.nat);
     if (b.eerder) parts.push(String(b.eerder).replace(/ \| /g, ", "));
     return parts.join(" \u00b7 ");
   }
@@ -391,6 +560,37 @@ details.card > summary { cursor: pointer; font-weight: 600; min-height: 32px; }
     var e = by[ds[ds.length - 1]];
     return nice(e.date) + (e.opp ? " tegen " + String(e.opp).replace(/ [HD]\d+$/, "") : "") + ": " + e.parts.join(", ");
   }
+  function prowHTML(x, sd, keep) {
+        var p = x.p, b = x.b, cap = sd.captain && norm(sd.captain) === norm(p.name), kp = keep.indexOf(norm(p.name)) >= 0, s2 = sub2(b), la = lastAct(p);
+    return '<li><button class="prow" data-p="' + p.id + '"><span class="nr">' + (p.number == null ? "-" : esc(p.number)) + '</span><span class="mid"><span class="l1">' + esc(p.name) + selBadges(b) + (kp ? '<span class="bdg">K</span>' : "") + (cap ? '<span class="bdg c">C</span>' : "") + (prestOf(b) ? '<span class="bdg star" title="Heeft prestaties">&#9733;</span>' : "") + (p.injury ? '<span class="bdg inj">geblesseerd</span>' : "") + '</span>' + (s2 ? '<span class="l2">' + esc(s2) + '</span>' : "") + "" + '</span><span class="st">' + cardBlocks(p) + (p.goals ? '<span class="gc">' + esc(p.goals) + '</span>' : "") + '</span></button></li>';
+  }
+  function isWide() { return window.innerWidth >= 900; }
+  function tabBoth(m) {
+    var q = norm(S.q);
+    var sides = [0, 1].map(function (i) { var sd = m.sides[i] || {}; return { sd: sd, keep: (sd.keepers || []).map(norm), all: sideList(m, i), name: i === 0 ? m.fixture.home : m.fixture.away }; });
+    var allp = sides[0].all.concat(sides[1].all);
+    var tot = function (k) { return allp.reduce(function (a, x) { return a + (x.p[k] || 0); }, 0); };
+    var pass = function (x) {
+      var p = x.p;
+      if (S.flt === "goals" && !p.goals) return false;
+      if (S.flt === "cards" && !(p.groen || p.geel || p.rood)) return false;
+      if (S.flt === "star" && !prestOf(x.b)) return false;
+      return !q || norm(p.name).indexOf(q) >= 0 || String(p.number) === S.q.trim();
+    };
+    S.list = [];
+    var cols = sides.map(function (sd, i) {
+      var rows = sd.all.filter(pass);
+      if (S.flt === "goals") rows.sort(function (a, b) { return (b.p.goals || 0) - (a.p.goals || 0); });
+      rows.forEach(function (x) { S.list.push(x.p.id); });
+      var goals = sd.all.reduce(function (a, x) { return a + (x.p.goals || 0); }, 0);
+      return '<div><div class="clab"><span style="font-size:22px;font-family:var(--head);color:var(--ink)">' + esc(sd.name) + '</span><span>' + goals + ' goals</span></div>' +
+        (rows.length ? '<ul class="roster">' + rows.map(function (x) { return prowHTML(x, sd.sd, sd.keep); }).join("") + '</ul>' : '<div class="empty"><p>' + (sd.all.length ? "Niemand gevonden." : "Geen spelerslijst voor dit team.") + '</p></div>') + teamNews(m, i) + '</div>';
+    });
+    var chips = [["all", "Alle " + allp.length], ["goals", "Gescoord " + allp.filter(function (x) { return x.p.goals; }).length], ["cards", "Kaarten " + allp.filter(function (x) { return x.p.groen || x.p.geel || x.p.rood; }).length], ["star", "\u2605 " + allp.filter(function (x) { return prestOf(x.b); }).length]];
+    return '<div class="sumline"><b>' + tot("goals") + '</b> goals \u00b7 <span class="cdot g"></span> ' + tot("groen") + ' <span class="cdot y"></span> ' + tot("geel") + ' <span class="cdot r"></span> ' + tot("rood") + '</div>' +
+      '<div class="fchips">' + chips.map(function (c) { return '<button class="fc" data-f="' + c[0] + '" aria-pressed="' + (S.flt === c[0]) + '">' + esc(c[1]) + '</button>'; }).join("") + '</div>' +
+      '<div class="cols">' + cols.join("") + '</div>';
+  }
   function tabTeam(m, i) {
     var sd = m.sides[i] || {}, all = sideList(m, i), q = norm(S.q), keep = (sd.keepers || []).map(norm);
     var tot = function (k) { return all.reduce(function (a, x) { return a + (x.p[k] || 0); }, 0); };
@@ -407,17 +607,15 @@ details.card > summary { cursor: pointer; font-weight: 600; min-height: 32px; }
     var chips = [["all", "Alle " + all.length], ["goals", "Gescoord " + all.filter(function (x) { return x.p.goals; }).length], ["cards", "Kaarten " + all.filter(function (x) { return x.p.groen || x.p.geel || x.p.rood; }).length], ["star", "\u2605 " + stars.length]];
     return '<div class="sumline"><b>' + tot("goals") + '</b> goals \u00b7 <span class="cdot g"></span> ' + tot("groen") + ' <span class="cdot y"></span> ' + tot("geel") + ' <span class="cdot r"></span> ' + tot("rood") + '</div>' +
       '<div class="fchips">' + chips.map(function (c) { return '<button class="fc" data-f="' + c[0] + '" aria-pressed="' + (S.flt === c[0]) + '">' + esc(c[1]) + '</button>'; }).join("") + '</div>' +
-      '<input class="search" id="q" type="search" inputmode="search" placeholder="Zoek naam of rugnummer" value="' + esc(S.q) + '" autocomplete="off" enterkeyhint="search">' +
       (rows.length ? '<ul class="roster">' + rows.map(function (x) {
-        var p = x.p, b = x.b, cap = sd.captain && norm(sd.captain) === norm(p.name), kp = keep.indexOf(norm(p.name)) >= 0, s2 = sub2(b), la = lastAct(p);
-        return '<li><button class="prow" data-p="' + p.id + '"><span class="nr">' + (p.number == null ? "-" : esc(p.number)) + '</span><span class="mid"><span class="l1">' + esc(p.name) + (kp ? '<span class="bdg">K</span>' : "") + (cap ? '<span class="bdg c">C</span>' : "") + (prestOf(b) ? '<span class="bdg star" title="Heeft prestaties">&#9733;</span>' : "") + (p.injury ? '<span class="bdg inj">geblesseerd</span>' : "") + '</span>' + (s2 ? '<span class="l2">' + esc(s2) + '</span>' : "") + (la ? '<span class="l4">Laatst: ' + esc(la) + '</span>' : "") + '</span><span class="st">' + cardBlocks(p) + (p.goals ? '<span class="gc">' + esc(p.goals) + '</span>' : "") + '</span></button></li>';
+        return prowHTML(x, sd, keep);
       }).join("") + '</ul>' : '<div class="empty"><p>' + (all.length ? "Niemand gevonden." : "Geen spelerslijst voor dit team.") + '</p></div>') + teamNews(m, i);
   }
 
   function bioBlock(p) {
     var b = p.bio; if (!b) return "";
     var born = b.geb ? nice(b.geb) + (b.age != null ? " (" + b.age + " jaar)" : "") + (b.plaats ? " in " + b.plaats : "") : (b.plaats || "");
-    var rows = [["Geboren", born], ["Nationaliteit", b.nat], ["Positie", b.pos], ["Eerdere clubs", b.eerder], ["Prestaties", b.prest], ["Overig", b.overig]].filter(function (r) { return r[1]; });
+    var rows = [["Geboren", born], ["Nationaliteit", isNL(b.nat) ? "" : b.nat], ["Positie", b.pos], ["Eerdere clubs", b.eerder], ["Prestaties", b.prest], ["Overig", b.overig], ["Nationale selectie", (b.sel || []).map(function (x) { return x.tip; }).join("; ")]].filter(function (r) { return r[1]; });
     if (!rows.length) return "";
     return '<div class="bio"><div class="lab">Spelersinfo</div>' + rows.map(function (r) { return '<div class="row"><span>' + esc(r[0]) + "</span><span>" + esc(r[1]).replace(/ \| /g, "<br>") + "</span></div>"; }).join("") + "</div>";
   }
@@ -478,8 +676,8 @@ details.card > summary { cursor: pointer; font-weight: 600; min-height: 32px; }
     if (!h.length) return "";
     return '<div class="lab" style="margin-top:12px">Eerdere seizoenen</div><div class="sub">' + h.map(function (x) { return esc(x.season) + ": " + esc(x.goals || 0) + " goals" + ((x.groen || x.geel || x.rood) ? " \u00b7 kaarten " + (x.groen || 0) + "-" + (x.geel || 0) + "-" + (x.rood || 0) : ""); }).join("<br>") + '</div>';
   }
-  function openPlayer(pid) {
-    var m = cur(), p = S.data.players[pid]; if (!m || !p) return;
+  function playerHTML(pid) {
+    var m = cur(), p = S.data.players[pid]; if (!m || !p) return "";
     var st = p.stats || {}, lines = linesAbout(m, p), idx = S.list.indexOf(pid);
     var news = (p.digest || []).filter(function (n) { return !isScorers(n.summary) && !lines.some(function (l) { return norm(l) === norm(n.summary); }); });
     var tags = sub2(p.bio);
@@ -495,43 +693,229 @@ details.card > summary { cursor: pointer; font-weight: 600; min-height: 32px; }
     if ((p.career || []).length) h += '<div class="lab" style="margin-top:12px">Loopbaan</div><div class="sub">' + p.career.map(function (c) { return esc(c.season) + " " + esc(c.club) + (c.number != null ? " #" + esc(c.number) : ""); }).join("<br>") + '</div>';
     if (p.origin) h += '<div class="lab" style="margin-top:12px">Herkomst</div><div class="sub">' + esc(typeof p.origin === "string" ? p.origin : JSON.stringify(p.origin)) + '</div>';
     h += '<div class="nav"><button id="xPrev"' + (idx > 0 ? "" : " disabled") + '>&lsaquo; Vorige</button><button id="xNext"' + (idx >= 0 && idx < S.list.length - 1 ? "" : " disabled") + '>Volgende &rsaquo;</button></div>';
-    $("sheet").innerHTML = h; $("sheetbg").classList.add("on"); $("sheet").scrollTop = 0;
-    $("xClose").onclick = closeSheet;
+    return h;
+  }
+  function bindPlayerNav(pid, closeFn) {
+    var idx = S.list.indexOf(pid);
+    $("xClose").onclick = closeFn;
     $("xPrev").onclick = function () { if (idx > 0) openPlayer(S.list[idx - 1]); };
     $("xNext").onclick = function () { if (idx >= 0 && idx < S.list.length - 1) openPlayer(S.list[idx + 1]); };
   }
-  function closeSheet() { $("sheetbg").classList.remove("on"); }
+  function openPlayer(pid) {
+    var m = cur(), p = S.data.players[pid]; if (!m || !p) return;
+    if (isWide()) { S.pl = pid; render(); return; }
+    $("sheetbg").classList.remove("center");
+    $("sheet").innerHTML = playerHTML(pid); $("sheetbg").classList.add("on"); $("sheet").scrollTop = 0;
+    bindPlayerNav(pid, closeSheet);
+  }
+  function formStats(club, x, sex) {
+    var P = S.data.players || {}, sc = [], cd = [];
+    Object.keys(P).forEach(function (k) {
+      var p = P[k]; if (!p || !p.team || (p.team.club || String(p.team.name || "").replace(/\s+[HD]\d+$/, "")) !== club || (sex && p.team.sex !== sex)) return;
+      ((p.stats && p.stats.matches) || []).forEach(function (y) {
+        if (y.date === x.date && y.goals && (!y.opponent || norm(String(y.opponent).replace(/\s+[HD]\d+$/, "")) === norm(x.opponent))) sc.push({ n: p.name, nr: p.number, g: y.goals, mins: (y.minutes || []).map(function (v) { return v + "'"; }).join(", ") });
+      });
+      (p.cards || []).forEach(function (c) { if (c.date === x.date && (!c.opponent || norm(String(c.opponent).replace(/\s+[HD]\d+$/, "")) === norm(x.opponent))) cd.push({ n: p.name, k: c.kind, m: c.minute }); });
+    });
+    var st = (S.data.matches.find(function (m) { return (m.standing || []).length && (!sex || m.fixture.sex === sex); }) || {}).standing || [];
+    var rows = st.filter(function (r) { return norm(r.club) === norm(club) || norm(r.club) === norm(x.opponent); });
+    var h = '';
+    var gl = x.gf;
+    h += '<div class="blocks" style="margin-top:12px"><div class="blk"><b>' + esc(x.gf) + '</b><small>doelpunten voor</small></div><div class="blk"><b>' + esc(x.ga) + '</b><small>tegen</small></div><div class="blk"><b>' + (x.gf - x.ga > 0 ? "+" : "") + (x.gf - x.ga) + '</b><small>saldo</small></div></div>';
+    if (sc.length) h += '<div class="lab" style="margin-top:12px">Doelpuntenmakers ' + esc(club) + '</div>' + sc.map(function (z) { return '<div class="msr" style="grid-template-columns:1fr auto"><div><b>' + esc(z.n) + '</b>' + (z.mins ? ' <span class="sub">' + esc(z.mins) + '</span>' : "") + '</div><span class="gc">' + esc(z.g) + '</span></div>'; }).join("");
+    else if (x.gf > 0) h += '<div class="sub" style="margin-top:12px">Doelpuntenmakers van deze wedstrijd zijn niet bekend.</div>';
+    if (cd.length) h += '<div class="lab" style="margin-top:12px">Kaarten</div>' + cd.map(function (z) { return '<div class="msr" style="grid-template-columns:1fr auto"><div><b>' + esc(z.n) + '</b></div><div class="sub">' + esc(KW[z.k] || "kaart") + (z.m != null ? " " + esc(z.m) + "'" : "") + '</div></div>'; }).join("");
+    if (rows.length) h += '<div class="lab" style="margin-top:12px">Stand nu</div><div style="overflow-x:auto"><table class="stand stand-full">' + STAND_HEAD + '<tbody>' + rows.map(function (r) { return standRow(r, norm(r.club) === norm(club)); }).join("") + '</tbody></table></div>';
+    return h;
+  }
+  function openForm(club, id, sex) {
+    var x = null;
+    S.data.matches.forEach(function (m) { (m.sides || []).forEach(function (sd) { if (sd && sd.club === club) (sd.form || []).forEach(function (y) { if (String(y.id) === String(id)) x = y; }); }); });
+    if (!x) return;
+    var home = x.home ? club : x.opponent, away = x.home ? x.opponent : club;
+    var sh = x.home ? x.gf : x.ga, sa = x.home ? x.ga : x.gf;
+    var res = { W: "Winst", G: "Gelijkspel", V: "Verlies" }[x.res] || "";
+    var follow = S.data.matches.find(function (m) { return String(m.fixture.id) === String(id); });
+    var h = '<div class="grab"></div><button class="close" id="xClose" aria-label="Sluiten">&times;</button>' +
+      '<div class="lab">' + (x.round ? "Ronde " + esc(x.round) + " \u00b7 " : "") + esc(nice(x.date)) + '</div>' +
+      '<h2>' + esc(home) + ' ' + esc(sh) + '-' + esc(sa) + ' ' + esc(away) + '</h2>' +
+      '<div class="sub" style="margin-top:6px">' + esc(res) + ' voor ' + esc(club) + (x.home ? " (thuis)" : " (uit)") + '</div>' +
+      formStats(club, x, sex) +
+      (follow ? '<div class="nav"><button id="xOpen">Open deze wedstrijd</button></div>' : "");
+    $("sheet").innerHTML = h; $("sheetbg").classList.add("on", "center"); $("sheet").scrollTop = 0;
+    $("xClose").onclick = closeSheet;
+    if (follow) $("xOpen").onclick = function () { closeSheet(); S.sel = follow.fixture.id; S.pl = null; S.tab = "ov"; render(); window.scrollTo(0, 0); };
+  }
+  function standTable(rows, hi) {
+    return '<table class="stand stand-full">' + STAND_HEAD + '<tbody>' + rows.map(function (r) { return standRow(r, hi.indexOf(norm(r.club)) >= 0); }).join("") + '</tbody></table>';
+  }
+  function standFor(sex) { var m = (S.data.matches || []).find(function (x) { return x.fixture.sex === sex && (x.standing || []).length; }); return m ? m.standing : []; }
+  function hiClubs(sex) { var o = []; (S.data.matches || []).forEach(function (m) { if (m.fixture.sex === sex) { o.push(norm(m.fixture.home)); o.push(norm(m.fixture.away)); } }); return o; }
+  function openStand() {
+    var cols = ["D", "H"].map(function (sx) { var st = standFor(sx); return st.length ? '<div class="blockgap"><h3 style="margin-bottom:6px">Stand ' + (sx === "D" ? "dames" : "heren") + '</h3><div style="overflow-x:auto">' + standTable(st, hiClubs(sx)) + '</div></div>' : ""; }).join("");
+    $("sheet").innerHTML = '<div class="grab"></div><button class="close" id="xClose" aria-label="Sluiten">&times;</button><div class="lab">Laatste stand</div>' + (cols ? '<div class="stcols" style="margin-top:8px">' + cols + '</div>' : '<div class="sub" style="margin-top:8px">Nog geen stand in het telefoonbestand.</div>');
+    $("sheet").classList.add("wide"); $("sheetbg").classList.add("on", "center"); $("sheet").scrollTop = 0; $("xClose").onclick = closeSheet;
+  }
+  function openTops() {
+    var T = (S.data && S.data.topscorers) || {};
+    var hi = { D: hiClubs("D"), H: hiClubs("H") };
+    var cols = ["D", "H"].map(function (sx) {
+      var t = T[sx]; if (!t || !(t.rows || []).length) return "";
+      var rk = 0, prev = null;
+      return '<div class="blockgap"><h3 style="margin-bottom:2px">Topscorers ' + (sx === "D" ? "dames" : "heren") + '</h3><div class="sub" style="margin-bottom:6px">' + esc(t.season) + (t.date ? " \u00b7 peildatum " + esc(nice(t.date)) : "") + " \u00b7 " + t.rows.length + (sx === "D" ? " speelsters" : " spelers") + '</div><div style="overflow-x:auto"><table class="stand stand-full tops"><thead><tr><th>#</th><th>Naam</th><th>Club</th><th>Doelpunten</th><th>VD</th><th>SC</th><th>SB</th></tr></thead><tbody>' +
+        t.rows.map(function (r, i) { if (r.goals !== prev) { rk = i + 1; prev = r.goals; } return '<tr' + (hi[sx].indexOf(norm(r.club)) >= 0 ? ' class="me"' : "") + '><td>' + rk + '</td><td>' + esc(r.naam) + '</td><td>' + esc(r.club) + '</td><td><b>' + esc(r.goals) + '</b></td><td>' + esc(r.vd == null ? "" : r.vd) + '</td><td>' + esc(r.sc == null ? "" : r.sc) + '</td><td>' + esc(r.sb == null ? "" : r.sb) + '</td></tr>'; }).join("") + '</tbody></table></div></div>';
+    }).join("");
+    $("sheet").innerHTML = '<div class="grab"></div><button class="close" id="xClose" aria-label="Sluiten">&times;</button><div class="lab">Topscorers Hoofdklasse</div>' + (cols ? '<div class="stcols" style="margin-top:8px">' + cols + '</div><div class="sub" style="margin-top:6px">VD veldgoal \u00b7 SC strafcorner \u00b7 SB strafbal</div>' : '<div class="sub" style="margin-top:8px">Nog geen topscorers in het telefoonbestand. Zet de lijsten in HAS en druk op Zet op telefoon.</div>');
+    $("sheet").classList.add("wide"); $("sheetbg").classList.add("on", "center"); $("sheet").scrollTop = 0; $("xClose").onclick = closeSheet;
+  }
+  function closeSheet() { $("sheetbg").classList.remove("on"); $("sheet").classList.remove("wide"); }
+
+  /* ---------- iPad landscape ---------- */
+  function chipsHtml() {
+    return ordered().filter(function (m) { return S.hidden.indexOf(m.fixture.id) < 0; }).map(function (m) {
+      return '<button class="mchip" data-m="' + m.fixture.id + '" aria-pressed="' + (m.fixture.id === S.sel) + '">' + (S.reorder ? '<span class="mv"><span role="button" data-mv="' + m.fixture.id + '" data-dir="-1" title="Naar links">&lsaquo;</span><span role="button" data-mv="' + m.fixture.id + '" data-dir="1" title="Naar rechts">&rsaquo;</span></span>' : '<span class="mx" data-hide="' + m.fixture.id + '" role="button" title="Uit beeld halen">&times;</span>') + '<b>' + esc(matchLabel(m)) + '</b><small>' + esc(nice(m.fixture.date)) + (m.fixture.time ? " · " + esc(m.fixture.time) : "") + (m.fixture.sex === "H" ? " · heren" : " · dames") + '</small></button>';
+    }).join("");
+  }
+  function headerWide() {
+    var has = S.data && S.data.matches.length;
+    return '<div class="top2"><div class="r1"><div class="bl"><div class="brand">HAS<i>.</i>LIVE</div><div class="stamp">' + stampText().replace("<br>", " · ") + '</div></div>' +
+      (has ? '<button class="hbtn" id="bStand">Stand</button><button class="hbtn" id="bTops">Topscorers</button><button class="hbtn" id="bOrder" aria-pressed="' + S.reorder + '">Volgorde</button><div class="chips" role="tablist">' + chipsHtml() + '</div>' : '<span style="flex:1"></span>') +
+      '<button class="hbtn pri" id="bDrive2"' + (S.busy ? " disabled" : "") + '>' + (S.busy ? "Bezig..." : "Vernieuwen") + '</button><button class="hbtn" id="bFile2">Uitloggen</button></div></div>';
+  }
+  function sbSide(m) {
+    var f = m.fixture, played = f.gh != null && f.ga != null, sh = m.sheet || {};
+    return '<div class="scoreboard sbs"><div class="sx">' + (f.sex === "H" ? "Heren" : "Dames") + (f.round ? " · ronde " + esc(f.round) : "") + " · " + esc(nice(f.date)) + (f.time ? " " + esc(f.time) : "") + '</div>' +
+      '<div class="sbt"><div class="t">' + esc(f.home) + '</div><div class="sc">' + (played ? esc(f.gh) + "-" + esc(f.ga) : "–") + '</div><div class="t">' + esc(f.away) + '</div></div>' +
+      ((sh.venue || f.venue) ? '<div class="meta"><span>' + esc(sh.venue || f.venue) + '</span></div>' : "") +
+      (sh.referees ? '<div class="meta"><span>Scheids: ' + esc(refsOnly(sh.referees)) + '</span></div>' : "") + coachRow(m) + '</div>';
+  }
+  function prow2(x, sd, keep) {
+    var p = x.p, b = x.b, cap = sd.captain && norm(sd.captain) === norm(p.name), kp = keep.indexOf(norm(p.name)) >= 0, s2 = sub2(b);
+    var bd = selBadges(b) + (kp ? '<span class="bdg">K</span>' : "") + (cap ? '<span class="bdg c">C</span>' : "") + (prestOf(b) ? '<span class="bdg star" title="Heeft prestaties">&#9733;</span>' : "") + (p.injury ? '<span class="bdg inj">geblesseerd</span>' : "");
+    return '<li><button class="prow2' + (S.pl === p.id ? " on" : "") + '" data-p="' + p.id + '"><span class="nr">' + (p.number == null ? "-" : esc(p.number)) + '</span><span class="mid"><span class="l1">' + esc(p.name) + '</span>' + (bd ? '<span class="bd">' + bd + '</span>' : "") + (s2 ? '<span class="l2">' + esc(s2) + '</span>' : "") + '</span><span class="st">' + cardBlocks(p) + (p.goals ? '<span class="gc">' + esc(p.goals) + '</span>' : "") + '</span></button></li>';
+  }
+  function rostersWide(m) {
+    var q = norm(S.q);
+    var sides = [0, 1].map(function (i) { var sd = m.sides[i] || {}; return { sd: sd, keep: (sd.keepers || []).map(norm), all: sideList(m, i), name: i === 0 ? m.fixture.home : m.fixture.away }; });
+    var allp = sides[0].all.concat(sides[1].all);
+    var tot = function (k) { return allp.reduce(function (a, x) { return a + (x.p[k] || 0); }, 0); };
+    var pass = function (x) {
+      var p = x.p;
+      if (S.flt === "goals" && !p.goals) return false;
+      if (S.flt === "cards" && !(p.groen || p.geel || p.rood)) return false;
+      if (S.flt === "star" && !prestOf(x.b)) return false;
+      return !q || norm(p.name).indexOf(q) >= 0 || String(p.number) === S.q.trim();
+    };
+    S.list = [];
+    var panes = sides.map(function (sd) {
+      var rows = sd.all.filter(pass);
+      if (S.flt === "goals") rows.sort(function (a, b) { return (b.p.goals || 0) - (a.p.goals || 0); });
+      rows.forEach(function (x) { S.list.push(x.p.id); });
+      var goals = sd.all.reduce(function (a, x) { return a + (x.p.goals || 0); }, 0);
+      return '<div class="pane"><div class="ph"><b>' + esc(sd.name) + '</b><span>' + goals + ' goals</span></div><div class="pbody">' +
+        (rows.length ? '<ul class="roster2">' + rows.map(function (x) { return prow2(x, sd.sd, sd.keep); }).join("") + '</ul>' : '<div class="empty"><p>' + (sd.all.length ? "Niemand gevonden." : "Geen spelerslijst voor dit team.") + '</p></div>') + '</div></div>';
+    });
+    var chips = [["all", "Alle " + allp.length], ["goals", "Gescoord " + allp.filter(function (x) { return x.p.goals; }).length], ["cards", "Kaarten " + allp.filter(function (x) { return x.p.groen || x.p.geel || x.p.rood; }).length], ["star", "★ " + allp.filter(function (x) { return prestOf(x.b); }).length]];
+    return '<div class="rost"><div class="rtools"><div class="sumline"><b>' + tot("goals") + '</b> goals · <span class="cdot g"></span> ' + tot("groen") + ' <span class="cdot y"></span> ' + tot("geel") + ' <span class="cdot r"></span> ' + tot("rood") + '</div>' +
+      '<div class="fchips">' + chips.map(function (c) { return '<button class="fc" data-f="' + c[0] + '" aria-pressed="' + (S.flt === c[0]) + '">' + esc(c[1]) + '</button>'; }).join("") + '</div></div>' + panes.join("") + '</div>';
+  }
+  function standSide(m) {
+    var st = m.standing || []; if (!st.length) return '<div class="sub" style="padding:8px 2px">Geen stand in het telefoonbestand.</div>';
+    var f = m.fixture, keys = [norm(f.home), norm(f.away)];
+    return '<div class="card"><h3>Stand ' + (f.sex === "H" ? "heren" : "dames") + '</h3><table class="stand s2"><thead><tr><th>#</th><th>Club</th><th>Gesp</th><th>W</th><th>G</th><th>V</th><th>DS</th><th>Pnt</th></tr></thead><tbody>' +
+      st.map(function (r) { return '<tr' + (keys.indexOf(norm(r.club)) >= 0 ? ' class="me"' : "") + '><td>' + esc(r.pos) + '</td><td>' + esc(r.club) + '</td><td>' + esc(r.g) + '</td><td>' + esc(nz(r.w)) + '</td><td>' + esc(nz(r.gl)) + '</td><td>' + esc(nz(r.v)) + '</td><td>' + dsOf(r) + '</td><td><b>' + esc(r.p) + '</b></td></tr>'; }).join("") + '</tbody></table></div>';
+  }
+  function vormSide(m) {
+    var more = [0, 1].some(function (i) { var sd = m.sides[i]; return sd && (sd.form || []).length > 10; });
+    return formBlock(m, 0, 10) + formBlock(m, 1, 10) + (more ? '<button class="hbtn" id="bAll" style="width:100%;margin-bottom:8px">' + (S.formAll ? "Alleen de laatste 10" : "Alle wedstrijden tonen") + '</button>' : "");
+  }
+  function infoSide(m) {
+    var h = factsBlock(m) + eventsBlock(m) + teamNews(m, 0) + teamNews(m, 1) + warn(m);
+    return h || '<div class="sub" style="padding:8px 2px">Geen extra info voor deze wedstrijd.</div>';
+  }
+  function sideWide(m) {
+    if (S.pl && S.data.players[S.pl]) return '<div class="side"><div class="pside">' + playerHTML(S.pl) + '</div></div>';
+    var T = [["vorm", "Vorm"], ["stand", "Stand"], ["duels", "Duels"], ["info", "Info"]];
+    var body = S.stab === "stand" ? standSide(m) : S.stab === "duels" ? tabDuels(m) : S.stab === "info" ? infoSide(m) : vormSide(m);
+    return '<div class="side">' + sbSide(m) + '<div class="stabs" role="tablist">' + T.map(function (t) { return '<button class="stab" role="tab" data-st="' + t[0] + '" aria-selected="' + (S.stab === t[0]) + '">' + t[1] + '</button>'; }).join("") + '</div><div class="sbody">' + body + '</div></div>';
+  }
+  var wideSel = null;
+  function renderWide() {
+    var d = S.data, m = cur();
+    var sc = [].map.call(document.querySelectorAll(".pbody"), function (e) { return e.scrollTop; });
+    var sbE = document.querySelector(".sbody"), psE = document.querySelector(".pside"), chE = document.querySelector(".top2 .chips");
+    var keepY = wideSel === S.sel, sbY = sbE ? sbE.scrollTop : 0, psY = psE ? psE.scrollTop : 0, chX = chE ? chE.scrollLeft : 0;
+    var main = S.needKey ? '<div style="flex:1;overflow:auto;max-width:480px;margin:0 auto;width:100%">' + keyForm() + '</div>' : (!d || !d.matches.length) ? '<div style="flex:1;overflow:auto">' + empty() + '</div>' : m ? '<div class="main3">' + rostersWide(m) + sideWide(m) + '</div>' : "";
+    $("app").innerHTML = '<div class="W">' + headerWide() + notes() + main + '</div>';
+    wideSel = S.sel;
+    if (keepY) {
+      [].forEach.call(document.querySelectorAll(".pbody"), function (e, i) { e.scrollTop = sc[i] || 0; });
+      var a = document.querySelector(".sbody"), b = document.querySelector(".pside"); if (a) a.scrollTop = sbY; if (b) b.scrollTop = psY;
+    }
+    var c = document.querySelector(".top2 .chips"); if (c) c.scrollLeft = chX;
+    var A = $("app"), on = function (sel, fn) { A.querySelectorAll(sel).forEach(fn); };
+    on("[data-hide]", function (x) { x.onclick = function (e) { e.stopPropagation(); var id = +x.dataset.hide; S.hidden.push(id); saveHidden(); if (S.sel === id) { var rest = S.data.matches.filter(function (mm) { return S.hidden.indexOf(mm.fixture.id) < 0; }); S.sel = rest.length ? rest[0].fixture.id : id; S.pl = null; } render(); }; });
+    on("[data-m]", function (b) { b.onclick = function () { S.sel = +b.dataset.m; S.pl = null; S.q = ""; S.flt = "all"; render(); }; });
+    on("[data-f]", function (b) { b.onclick = function () { S.flt = b.dataset.f; render(); }; });
+    on("[data-st]", function (b) { b.onclick = function () { S.stab = b.dataset.st; render(); }; });
+    on("[data-fm]", function (b) { b.onclick = function () { openForm(b.dataset.club, b.dataset.fm, b.dataset.sex); }; });
+    on("[data-p]", function (b) { b.onclick = function () { openPlayer(+b.dataset.p); }; });
+    on("[data-mv]", function (x) { x.onclick = function (e) { e.stopPropagation(); moveMatch(+x.dataset.mv, +x.dataset.dir); }; });
+    var bS = $("bStand"); if (bS) bS.onclick = openStand;
+    var bT = $("bTops"); if (bT) bT.onclick = openTops;
+    var bO = $("bOrder"); if (bO) bO.onclick = function () { S.reorder = !S.reorder; render(); };
+    var bA = $("bAll"); if (bA) bA.onclick = function () { S.formAll = !S.formAll; render(); };
+    $("bDrive2").onclick = fromDrive;
+    $("bFile2").onclick = logout; bindKeyForm();
+    if (S.pl && $("xClose")) bindPlayerNav(S.pl, function () { S.pl = null; render(); });
+  }
 
   function render() {
     var d = S.data, m = cur(), body = "";
+    var wideNow = isWide(); document.body.classList.toggle("w", wideNow);
+    if (wideNow) { renderWide(); return; }
     var qHad = document.activeElement && document.activeElement.id === "q";
     if (S.needKey) body = notes() + keyForm();
     else if (!d || !d.matches.length) body = notes() + empty();
     else if (m) {
       var f = m.fixture;
       body = notes() + scoreboard(m) +
-        '<div class="tabs" role="tablist"><button class="tab" role="tab" data-t="h" aria-selected="' + (S.tab === "h") + '">' + esc(f.home) + '</button><button class="tab" role="tab" data-t="a" aria-selected="' + (S.tab === "a") + '">' + esc(f.away) + '</button><button class="tab" role="tab" data-t="ov" aria-selected="' + (S.tab === "ov") + '">Info</button><button class="tab" role="tab" data-t="d" aria-selected="' + (S.tab === "d") + '">Duels</button></div>' +
-        (S.tab === "ov" ? tabOverview(m) : S.tab === "h" ? tabTeam(m, 0) : S.tab === "a" ? tabTeam(m, 1) : tabDuels(m));
+        (isWide() ? '<div class="tabs" role="tablist"><button class="tab" role="tab" data-t="h" aria-selected="' + (S.tab === "h" || S.tab === "a") + '">Spelers van beide teams</button><button class="tab" role="tab" data-t="ov" aria-selected="' + (S.tab === "ov") + '">Overzicht</button><button class="tab" role="tab" data-t="d" aria-selected="' + (S.tab === "d") + '">Duels</button></div>' :
+        '<div class="tabs" role="tablist"><button class="tab" role="tab" data-t="h" aria-selected="' + (S.tab === "h") + '">' + esc(f.home) + '</button><button class="tab" role="tab" data-t="a" aria-selected="' + (S.tab === "a") + '">' + esc(f.away) + '</button><button class="tab" role="tab" data-t="ov" aria-selected="' + (S.tab === "ov") + '">Overzicht</button><button class="tab" role="tab" data-t="d" aria-selected="' + (S.tab === "d") + '">Duels</button></div>') +
+        (S.tab === "ov" ? tabOverview(m) : (S.tab === "h" || S.tab === "a") && isWide() ? tabBoth(m) : S.tab === "h" ? tabTeam(m, 0) : S.tab === "a" ? tabTeam(m, 1) : tabDuels(m));
     }
     $("app").innerHTML = header() + body;
-    $("bDrive").disabled = S.busy; $("bDrive").textContent = S.busy ? "Bezig..." : "Vernieuwen"; var pg = $("pwGo"); if (pg) { pg.onclick = function () { var v = $("pw").value.trim(); if (v) { setKey(v); S.needKey = false; S.err = ""; fromDrive(); } }; $("pw").onkeydown = function (e) { if (e.key === "Enter") pg.click(); }; }
-    $("app").querySelectorAll("[data-m]").forEach(function (b) { b.onclick = function () { S.sel = +b.dataset.m; S.q = ""; S.flt = "all"; render(); window.scrollTo(0, 0); }; });
+    var topEl = $("app").querySelector(".top");
+    if (topEl) document.documentElement.style.setProperty("--topH", topEl.offsetHeight + "px");
+    $("bDrive").disabled = S.busy; $("bDrive").textContent = S.busy ? "Bezig..." : "Vernieuwen"; bindKeyForm();
+    $("app").querySelectorAll("[data-hide]").forEach(function (x) { x.onclick = function (e) { e.stopPropagation(); var id = +x.dataset.hide; S.hidden.push(id); saveHidden(); if (S.sel === id) { var rest = S.data.matches.filter(function (m) { return S.hidden.indexOf(m.fixture.id) < 0; }); S.sel = rest.length ? rest[0].fixture.id : id; } render(); }; });
+    $("app").querySelectorAll("[data-unhide]").forEach(function (x) { x.onclick = function () { S.hidden = []; saveHidden(); render(); }; });
+    $("app").querySelectorAll("[data-m]").forEach(function (b) { b.onclick = function () { S.sel = +b.dataset.m; S.pl = null; S.q = ""; S.flt = "all"; render(); window.scrollTo(0, 0); }; });
     $("app").querySelectorAll("[data-t]").forEach(function (b) { b.onclick = function () { S.tab = b.dataset.t; S.q = ""; S.flt = "all"; render(); }; });
     $("app").querySelectorAll("[data-f]").forEach(function (b) { b.onclick = function () { S.flt = b.dataset.f; render(); }; });
+    fitRows();
+    var bS = $("bStand"); if (bS) bS.onclick = openStand;
+    var bT = $("bTops"); if (bT) bT.onclick = openTops;
+    var bO = $("bOrder"); if (bO) bO.onclick = function () { S.reorder = !S.reorder; render(); };
+    $("app").querySelectorAll("[data-mv]").forEach(function (x) { x.onclick = function (e) { e.stopPropagation(); moveMatch(+x.dataset.mv, +x.dataset.dir); }; });
+    $("app").querySelectorAll("[data-fm]").forEach(function (b) { b.onclick = function () { openForm(b.dataset.club, b.dataset.fm, b.dataset.sex); }; });
     $("app").querySelectorAll("[data-p]").forEach(function (b) { b.onclick = function () { openPlayer(+b.dataset.p); }; });
     var q = $("q");
     if (q) { q.oninput = function () { S.q = q.value; var pos = q.selectionStart; render(); var q2 = $("q"); q2.focus(); try { q2.setSelectionRange(pos, pos); } catch (e) { } }; if (qHad) { q.focus(); } }
   }
 
   $("bDrive").onclick = fromDrive;
-  $("bFile").onclick = function () { setKey(""); S.data = null; try { localStorage.removeItem(KEY); } catch (e) { } S.needKey = true; render(); };
+  $("bFile").onclick = logout;
   $("fileIn").onchange = function () { if (this.files && this.files[0]) fromFile(this.files[0]); this.value = ""; };
   $("sheetbg").onclick = function (e) { if (e.target === $("sheetbg")) closeSheet(); };
 
+  var wasWide = isWide();
+  window.addEventListener("resize", function () { var w = isWide(); if (w !== wasWide) { wasWide = w; render(); } });
   loadCache();
   render();
   fromDrive();
   document.addEventListener("visibilitychange", function () { if (!document.hidden && !S.busy && !S.needKey) fromDrive(); });
+  if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(function () { });
 })();
 </script>
 
