@@ -419,7 +419,7 @@ body.w .bar, body.w::before { display: none; }
   function header() {
     var d = S.data;
     return '<div class="top"><div class="brandrow"><div class="brand">HAS<i>.</i>LIVE</div><div class="stamp">' + stampText() + '</div></div>' +
-      (d && d.matches.length ? '<div class="hbar"><button class="hbtn" id="bStand">Stand</button><button class="hbtn" id="bTops">Topscorers</button><button class="hbtn" id="bOrder" aria-pressed="' + S.reorder + '">Volgorde</button></div><div class="chips" role="tablist">' + ordered().filter(function (m) { return S.hidden.indexOf(m.fixture.id) < 0; }).map(function (m) {
+      (d && d.matches.length ? '<div class="hbar"><button class="hbtn" id="bStand">Stand</button><button class="hbtn" id="bTops">Topscorers</button><button class="hbtn" id="bArch">Archief</button><button class="hbtn" id="bOrder" aria-pressed="' + S.reorder + '">Volgorde</button></div><div class="chips" role="tablist">' + ordered().filter(function (m) { return S.hidden.indexOf(m.fixture.id) < 0; }).map(function (m) {
         return '<button class="mchip" data-m="' + m.fixture.id + '" aria-pressed="' + (m.fixture.id === S.sel) + '">' + (S.reorder ? '<span class="mv"><span role="button" data-mv="' + m.fixture.id + '" data-dir="-1" title="Naar links">&lsaquo;</span><span role="button" data-mv="' + m.fixture.id + '" data-dir="1" title="Naar rechts">&rsaquo;</span></span>' : '<span class="mx" data-hide="' + m.fixture.id + '" role="button" title="Uit beeld halen">&times;</span>') + '<b>' + esc(matchLabel(m)) + '</b><small>' + esc(nice(m.fixture.date)) + (m.fixture.time ? " · " + esc(m.fixture.time) : "") + (m.fixture.sex === "H" ? " · heren" : " · dames") + '</small></button>';
       }).join("") + '</div>' : "") + '</div>';
   }
@@ -768,6 +768,26 @@ body.w .bar, body.w::before { display: none; }
     $("sheet").innerHTML = '<div class="grab"></div><button class="close" id="xClose" aria-label="Sluiten">&times;</button><div class="lab">Topscorers Hoofdklasse</div>' + (cols ? '<div class="stcols" style="margin-top:8px">' + cols + '</div><div class="sub" style="margin-top:6px">VD veldgoal \u00b7 SC strafcorner \u00b7 SB strafbal</div>' : '<div class="sub" style="margin-top:8px">Nog geen topscorers in het telefoonbestand. Zet de lijsten in HAS en druk op Zet op telefoon.</div>');
     $("sheet").classList.add("wide"); $("sheetbg").classList.add("on", "center"); $("sheet").scrollTop = 0; $("xClose").onclick = closeSheet;
   }
+  function openArchief(idx) {
+    var A = (S.data && S.data.archief) || {};
+    var seas = []; ["D", "H"].forEach(function (sx) { (A[sx] || []).forEach(function (e) { if (seas.indexOf(e.season) < 0) seas.push(e.season); }); });
+    seas.sort().reverse();
+    var sel = seas[idx] || seas[0];
+    var chips = seas.map(function (n, i) { return '<button class="fc" data-ar="' + i + '" aria-pressed="' + (n === sel) + '">' + esc(n) + '</button>'; }).join("");
+    var cols = ["D", "H"].map(function (sx) {
+      var e = (A[sx] || []).filter(function (x) { return x.season === sel; })[0]; if (!e) return "";
+      var hi = hiClubs(sx);
+      var po = (e.playoffs || []).map(function (g) { return '<tr><td>' + esc(nice(g.date)) + '</td><td>' + esc(g.home) + '</td><td><b>' + esc(g.gh) + '-' + esc(g.ga) + '</b></td><td>' + esc(g.away) + '</td></tr>'; }).join("");
+      return '<div class="blockgap"><h3 style="margin-bottom:6px">Eindstand ' + (sx === "D" ? "dames" : "heren") + ' ' + esc(sel) + '</h3>' +
+        (e.rows.length ? '<div style="overflow-x:auto">' + standTable(e.rows, hi) + '</div>' : '<div class="sub">Geen eindstand beschikbaar.</div>') +
+        '<h3 style="margin:14px 0 6px">Play-offs en promotie/degradatie</h3>' +
+        (po ? '<div style="overflow-x:auto"><table class="stand stand-full"><tbody>' + po + '</tbody></table></div>' : '<div class="sub">Geen play-offs gevonden.</div>') + '</div>';
+    }).join("");
+    $("sheet").innerHTML = '<div class="grab"></div><button class="close" id="xClose" aria-label="Sluiten">&times;</button><div class="lab">Archief laatste vijf seizoenen</div>' +
+      (seas.length ? '<div class="fchips" style="margin:8px 0">' + chips + '</div><div class="stcols" style="margin-top:8px">' + cols + '</div>' : '<div class="sub" style="margin-top:8px">Nog geen archief in het telefoonbestand. Druk in HAS op Zet op telefoon.</div>');
+    $("sheet").classList.add("wide"); $("sheetbg").classList.add("on", "center"); $("xClose").onclick = closeSheet;
+    $("sheet").querySelectorAll("[data-ar]").forEach(function (b) { b.onclick = function () { var y = $("sheet").scrollTop; openArchief(+b.dataset.ar); $("sheet").scrollTop = y; }; });
+  }
   function closeSheet() { $("sheetbg").classList.remove("on"); $("sheet").classList.remove("wide"); }
 
   /* ---------- iPad landscape ---------- */
@@ -779,7 +799,7 @@ body.w .bar, body.w::before { display: none; }
   function headerWide() {
     var has = S.data && S.data.matches.length;
     return '<div class="top2"><div class="r1"><div class="bl"><div class="brand">HAS<i>.</i>LIVE</div><div class="stamp">' + stampText().replace("<br>", " · ") + '</div></div>' +
-      (has ? '<button class="hbtn" id="bStand">Stand</button><button class="hbtn" id="bTops">Topscorers</button><button class="hbtn" id="bOrder" aria-pressed="' + S.reorder + '">Volgorde</button><div class="chips" role="tablist">' + chipsHtml() + '</div>' : '<span style="flex:1"></span>') +
+      (has ? '<button class="hbtn" id="bStand">Stand</button><button class="hbtn" id="bTops">Topscorers</button><button class="hbtn" id="bArch">Archief</button><button class="hbtn" id="bOrder" aria-pressed="' + S.reorder + '">Volgorde</button><div class="chips" role="tablist">' + chipsHtml() + '</div>' : '<span style="flex:1"></span>') +
       '<button class="hbtn pri" id="bDrive2"' + (S.busy ? " disabled" : "") + '>' + (S.busy ? "Bezig..." : "Vernieuwen") + '</button><button class="hbtn" id="bFile2">Uitloggen</button></div></div>';
   }
   function sbSide(m) {
@@ -863,7 +883,7 @@ body.w .bar, body.w::before { display: none; }
     on("[data-p]", function (b) { b.onclick = function () { openPlayer(+b.dataset.p); }; });
     on("[data-mv]", function (x) { x.onclick = function (e) { e.stopPropagation(); moveMatch(+x.dataset.mv, +x.dataset.dir); }; });
     var bS = $("bStand"); if (bS) bS.onclick = openStand;
-    var bT = $("bTops"); if (bT) bT.onclick = openTops;
+    var bT = $("bTops"); if (bT) bT.onclick = openTops; var bAr = $("bArch"); if (bAr) bAr.onclick = function () { openArchief(0); };
     var bO = $("bOrder"); if (bO) bO.onclick = function () { S.reorder = !S.reorder; render(); };
     var bA = $("bAll"); if (bA) bA.onclick = function () { S.formAll = !S.formAll; render(); };
     $("bDrive2").onclick = fromDrive;
@@ -896,7 +916,7 @@ body.w .bar, body.w::before { display: none; }
     $("app").querySelectorAll("[data-f]").forEach(function (b) { b.onclick = function () { S.flt = b.dataset.f; render(); }; });
     fitRows();
     var bS = $("bStand"); if (bS) bS.onclick = openStand;
-    var bT = $("bTops"); if (bT) bT.onclick = openTops;
+    var bT = $("bTops"); if (bT) bT.onclick = openTops; var bAr = $("bArch"); if (bAr) bAr.onclick = function () { openArchief(0); };
     var bO = $("bOrder"); if (bO) bO.onclick = function () { S.reorder = !S.reorder; render(); };
     $("app").querySelectorAll("[data-mv]").forEach(function (x) { x.onclick = function (e) { e.stopPropagation(); moveMatch(+x.dataset.mv, +x.dataset.dir); }; });
     $("app").querySelectorAll("[data-fm]").forEach(function (b) { b.onclick = function () { openForm(b.dataset.club, b.dataset.fm, b.dataset.sex); }; });
