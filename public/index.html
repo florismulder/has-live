@@ -827,7 +827,8 @@ body.w .bar, body.w::before { display: none; }
   }
   function vormSide(m) {
     var more = [0, 1].some(function (i) { var sd = m.sides[i]; return sd && (sd.form || []).length > 10; });
-    return formBlock(m, 0, 10) + formBlock(m, 1, 10) + (more ? '<button class="hbtn" id="bAll" style="width:100%;margin-bottom:8px">' + (S.formAll ? "Alleen de laatste 10" : "Alle wedstrijden tonen") + '</button>' : "");
+    var tgl = more ? '<button class="hbtn" id="bAll" style="width:100%;margin-bottom:8px">' + (S.formAll ? "Terug naar de laatste 10" : "Alle wedstrijden tonen") + '</button>' : "";
+    return tgl + formBlock(m, 0, 10) + formBlock(m, 1, 10);
   }
   function infoSide(m) {
     var h = factsBlock(m) + eventsBlock(m) + teamNews(m, 0) + teamNews(m, 1) + warn(m);
@@ -855,9 +856,9 @@ body.w .bar, body.w::before { display: none; }
     var c = document.querySelector(".top2 .chips"); if (c) c.scrollLeft = chX;
     var A = $("app"), on = function (sel, fn) { A.querySelectorAll(sel).forEach(fn); };
     on("[data-hide]", function (x) { x.onclick = function (e) { e.stopPropagation(); var id = +x.dataset.hide; S.hidden.push(id); saveHidden(); if (S.sel === id) { var rest = S.data.matches.filter(function (mm) { return S.hidden.indexOf(mm.fixture.id) < 0; }); S.sel = rest.length ? rest[0].fixture.id : id; S.pl = null; } render(); }; });
-    on("[data-m]", function (b) { b.onclick = function () { S.sel = +b.dataset.m; S.pl = null; S.q = ""; S.flt = "all"; render(); }; });
+    on("[data-m]", function (b) { b.onclick = function () { S.sel = +b.dataset.m; S.pl = null; S.q = ""; S.flt = "all"; S.formAll = false; render(); }; });
     on("[data-f]", function (b) { b.onclick = function () { S.flt = b.dataset.f; render(); }; });
-    on("[data-st]", function (b) { b.onclick = function () { S.stab = b.dataset.st; render(); }; });
+    on("[data-st]", function (b) { b.onclick = function () { S.stab = b.dataset.st; S.formAll = false; render(); }; });
     on("[data-fm]", function (b) { b.onclick = function () { openForm(b.dataset.club, b.dataset.fm, b.dataset.sex); }; });
     on("[data-p]", function (b) { b.onclick = function () { openPlayer(+b.dataset.p); }; });
     on("[data-mv]", function (x) { x.onclick = function (e) { e.stopPropagation(); moveMatch(+x.dataset.mv, +x.dataset.dir); }; });
