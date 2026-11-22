@@ -264,6 +264,9 @@ body.w .bar, body.w::before { display: none; }
 .sbs .sbt .t { font: 700 16px/1.1 var(--head); }
 .sbs .sbt .t:first-child { text-align: right; }
 .sbs .sbt .sc { font: 700 28px var(--head); }
+.afgt { color: #c0563a; font-style: normal; font-weight: 700; }
+.afgl { display: inline-block; background: #c0563a; color: #fff; font: 700 11px var(--head); letter-spacing: .06em; padding: 2px 8px; border-radius: 99px; margin-top: 3px; }
+.sbs .sbt .sc .afgl, .scoreboard .sc .afgl { font-size: 13px; padding: 4px 10px; }
 .sbs .meta { font-size: 12px; justify-content: center; text-align: center; gap: 0 10px; }
 .sbs .coaches { margin-top: 6px; padding-top: 6px; font-size: 12px; justify-content: center; flex-wrap: wrap; gap: 2px 14px; }
 .stabs { flex: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin: 0 0 8px; }
@@ -420,7 +423,7 @@ body.w .bar, body.w::before { display: none; }
     var d = S.data;
     return '<div class="top"><div class="brandrow"><div class="brand">HAS<i>.</i>LIVE</div><div class="stamp">' + stampText() + '</div></div>' +
       (d && d.matches.length ? '<div class="hbar"><button class="hbtn" id="bStand">Stand</button><button class="hbtn" id="bTops">Topscorers</button><button class="hbtn" id="bArch">Archief</button><button class="hbtn" id="bOrder" aria-pressed="' + S.reorder + '">Volgorde</button></div><div class="chips" role="tablist">' + ordered().filter(function (m) { return S.hidden.indexOf(m.fixture.id) < 0; }).map(function (m) {
-        return '<button class="mchip" data-m="' + m.fixture.id + '" aria-pressed="' + (m.fixture.id === S.sel) + '">' + (S.reorder ? '<span class="mv"><span role="button" data-mv="' + m.fixture.id + '" data-dir="-1" title="Naar links">&lsaquo;</span><span role="button" data-mv="' + m.fixture.id + '" data-dir="1" title="Naar rechts">&rsaquo;</span></span>' : '<span class="mx" data-hide="' + m.fixture.id + '" role="button" title="Uit beeld halen">&times;</span>') + '<b>' + esc(matchLabel(m)) + '</b><small>' + esc(nice(m.fixture.date)) + (m.fixture.time ? " · " + esc(m.fixture.time) : "") + (m.fixture.sex === "H" ? " · heren" : " · dames") + '</small></button>';
+        return '<button class="mchip" data-m="' + m.fixture.id + '" aria-pressed="' + (m.fixture.id === S.sel) + '">' + (S.reorder ? '<span class="mv"><span role="button" data-mv="' + m.fixture.id + '" data-dir="-1" title="Naar links">&lsaquo;</span><span role="button" data-mv="' + m.fixture.id + '" data-dir="1" title="Naar rechts">&rsaquo;</span></span>' : '<span class="mx" data-hide="' + m.fixture.id + '" role="button" title="Uit beeld halen">&times;</span>') + '<b>' + esc(matchLabel(m)) + '</b><small>' + esc(nice(m.fixture.date)) + (m.fixture.time ? " · " + esc(m.fixture.time) : "") + (m.fixture.sex === "H" ? " · heren" : " · dames") + (m.fixture.cancelled ? ' · <em class="afgt">AFGELAST</em>' : "") + '</small></button>';
       }).join("") + '</div>' : "") + '</div>';
   }
   function notes() {
@@ -442,7 +445,7 @@ body.w .bar, body.w::before { display: none; }
     var f = m.fixture, played = f.gh != null && f.ga != null;
     var sh = m.sheet || {};
     return '<div class="scoreboard"><div class="sx">' + (f.sex === "H" ? "Heren" : "Dames") + (f.round ? " · ronde " + esc(f.round) : "") + '</div>' +
-      '<div class="teams"><div class="t">' + esc(f.home) + '</div><div class="sc">' + (played ? esc(f.gh) + "-" + esc(f.ga) : "–") + '</div><div class="t">' + esc(f.away) + '</div></div>' +
+      '<div class="teams"><div class="t">' + esc(f.home) + '</div><div class="sc">' + (played ? esc(f.gh) + "-" + esc(f.ga) : f.cancelled ? '<span class="afgl">AFGELAST</span>' : "–") + '</div><div class="t">' + esc(f.away) + '</div></div>' +
       '<div class="meta"><span>' + esc(nice(f.date)) + (f.time ? " " + esc(f.time) : "") + '</span>' + (sh.venue || f.venue ? '<span>' + esc(sh.venue || f.venue) + '</span>' : "") + '</div>' + (sh.referees ? '<div class="meta" style="margin-top:2px"><span>Scheidsrechters: ' + esc(refsOnly(sh.referees)) + '</span></div>' : "") + coachRow(m) + '</div>';
   }
 
@@ -793,7 +796,7 @@ body.w .bar, body.w::before { display: none; }
   /* ---------- iPad landscape ---------- */
   function chipsHtml() {
     return ordered().filter(function (m) { return S.hidden.indexOf(m.fixture.id) < 0; }).map(function (m) {
-      return '<button class="mchip" data-m="' + m.fixture.id + '" aria-pressed="' + (m.fixture.id === S.sel) + '">' + (S.reorder ? '<span class="mv"><span role="button" data-mv="' + m.fixture.id + '" data-dir="-1" title="Naar links">&lsaquo;</span><span role="button" data-mv="' + m.fixture.id + '" data-dir="1" title="Naar rechts">&rsaquo;</span></span>' : '<span class="mx" data-hide="' + m.fixture.id + '" role="button" title="Uit beeld halen">&times;</span>') + '<b>' + esc(matchLabel(m)) + '</b><small>' + esc(nice(m.fixture.date)) + (m.fixture.time ? " · " + esc(m.fixture.time) : "") + (m.fixture.sex === "H" ? " · heren" : " · dames") + '</small></button>';
+      return '<button class="mchip" data-m="' + m.fixture.id + '" aria-pressed="' + (m.fixture.id === S.sel) + '">' + (S.reorder ? '<span class="mv"><span role="button" data-mv="' + m.fixture.id + '" data-dir="-1" title="Naar links">&lsaquo;</span><span role="button" data-mv="' + m.fixture.id + '" data-dir="1" title="Naar rechts">&rsaquo;</span></span>' : '<span class="mx" data-hide="' + m.fixture.id + '" role="button" title="Uit beeld halen">&times;</span>') + '<b>' + esc(matchLabel(m)) + '</b><small>' + esc(nice(m.fixture.date)) + (m.fixture.time ? " · " + esc(m.fixture.time) : "") + (m.fixture.sex === "H" ? " · heren" : " · dames") + (m.fixture.cancelled ? ' · <em class="afgt">AFGELAST</em>' : "") + '</small></button>';
     }).join("");
   }
   function headerWide() {
@@ -805,7 +808,7 @@ body.w .bar, body.w::before { display: none; }
   function sbSide(m) {
     var f = m.fixture, played = f.gh != null && f.ga != null, sh = m.sheet || {};
     return '<div class="scoreboard sbs"><div class="sx">' + (f.sex === "H" ? "Heren" : "Dames") + (f.round ? " · ronde " + esc(f.round) : "") + " · " + esc(nice(f.date)) + (f.time ? " " + esc(f.time) : "") + '</div>' +
-      '<div class="sbt"><div class="t">' + esc(f.home) + '</div><div class="sc">' + (played ? esc(f.gh) + "-" + esc(f.ga) : "–") + '</div><div class="t">' + esc(f.away) + '</div></div>' +
+      '<div class="sbt"><div class="t">' + esc(f.home) + '</div><div class="sc">' + (played ? esc(f.gh) + "-" + esc(f.ga) : f.cancelled ? '<span class="afgl">AFGELAST</span>' : "–") + '</div><div class="t">' + esc(f.away) + '</div></div>' +
       ((sh.venue || f.venue) ? '<div class="meta"><span>' + esc(sh.venue || f.venue) + '</span></div>' : "") +
       (sh.referees ? '<div class="meta"><span>Scheids: ' + esc(refsOnly(sh.referees)) + '</span></div>' : "") + coachRow(m) + '</div>';
   }
