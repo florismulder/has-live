@@ -34,6 +34,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .twocol { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
 @media (min-width: 640px) { .twocol { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
 .sheet table.stand td, .sheet table.stand th { white-space: nowrap; }
+.vlt { border-collapse: collapse; width: 100%; font-size: 15px; font-variant-numeric: tabular-nums; } .vlt th { font-size: 12px; color: var(--muted, #777); padding: 5px 4px; text-align: center; } .vlt td { text-align: center; padding: 8px 4px; border-top: 1px solid var(--line); min-width: 30px; } .vlt td.l, .vlt th.l { text-align: left; white-space: nowrap; padding-right: 10px; position: sticky; left: 0; background: inherit; } .vlt tr.me td { background: rgba(240,122,26,.14); font-weight: 800; } .vlt td.p1 { color: #2f7d4f; font-weight: 800; } .vlt td.up { color: #2f7d4f; } .vlt td.dn { color: #c0392b; }
 .stand-full { font-size: 16px; } .stand-full th { font-size: 13px; padding: 6px 8px; } .stand-full td { padding: 9px 8px; } .stand-full td:nth-child(2) { white-space: nowrap; }
 .tops td:nth-child(2), .tops th:nth-child(2), .tops td:nth-child(3), .tops th:nth-child(3) { text-align: left; }
 .sheetbg.center .sheet.wide { max-width: 860px; max-height: 90vh; }
@@ -422,7 +423,7 @@ body.w .bar, body.w::before { display: none; }
   function header() {
     var d = S.data;
     return '<div class="top"><div class="brandrow"><div class="brand">HAS<i>.</i>LIVE</div><div class="stamp">' + stampText() + '</div></div>' +
-      (d && d.matches.length ? '<div class="hbar"><button class="hbtn" id="bStand">Stand</button><button class="hbtn" id="bTops">Topscorers</button><button class="hbtn" id="bArch">Archief</button><button class="hbtn" id="bOrder" aria-pressed="' + S.reorder + '">Volgorde</button></div><div class="chips" role="tablist">' + ordered().filter(function (m) { return S.hidden.indexOf(m.fixture.id) < 0; }).map(function (m) {
+      (d && d.matches.length ? '<div class="hbar"><button class="hbtn" id="bStand">Stand</button><button class="hbtn" id="bTops">Topscorers</button><button class="hbtn" id="bArch">Archief</button><button class="hbtn" id="bVerl">Verloop</button><button class="hbtn" id="bOrder" aria-pressed="' + S.reorder + '">Volgorde</button></div><div class="chips" role="tablist">' + ordered().filter(function (m) { return S.hidden.indexOf(m.fixture.id) < 0; }).map(function (m) {
         return '<button class="mchip" data-m="' + m.fixture.id + '" aria-pressed="' + (m.fixture.id === S.sel) + '">' + (S.reorder ? '<span class="mv"><span role="button" data-mv="' + m.fixture.id + '" data-dir="-1" title="Naar links">&lsaquo;</span><span role="button" data-mv="' + m.fixture.id + '" data-dir="1" title="Naar rechts">&rsaquo;</span></span>' : '<span class="mx" data-hide="' + m.fixture.id + '" role="button" title="Uit beeld halen">&times;</span>') + '<b>' + esc(matchLabel(m)) + '</b><small>' + esc(nice(m.fixture.date)) + (m.fixture.time ? " · " + esc(m.fixture.time) : "") + (m.fixture.sex === "H" ? " · heren" : " · dames") + (m.fixture.cancelled ? ' · <em class="afgt" title="Afgelast">AFG.</em>' : "") + '</small></button>';
       }).join("") + '</div>' : "") + '</div>';
   }
@@ -791,6 +792,33 @@ body.w .bar, body.w::before { display: none; }
     $("sheet").classList.add("wide"); $("sheetbg").classList.add("on", "center"); $("xClose").onclick = closeSheet;
     $("sheet").querySelectorAll("[data-ar]").forEach(function (b) { b.onclick = function () { var y = $("sheet").scrollTop; openArchief(+b.dataset.ar); $("sheet").scrollTop = y; }; });
   }
+  function openVerloop(sx, kl) {
+    var V = (S.data && S.data.verloop) || {};
+    var avail = ["D", "H"].filter(function (x) { return V[x]; });
+    if (!V[sx] && avail.length) sx = avail[0];
+    var kls = V[sx] ? Object.keys(V[sx]) : [];
+    if (kls.indexOf(kl) < 0 && kls.length) kl = kls[0];
+    var d = V[sx] && V[sx][kl];
+    var hi = hiClubs(sx);
+    var segSx = avail.map(function (x) { return '<button class="fc" data-vs="' + x + '" aria-pressed="' + (x === sx) + '">' + (x === "D" ? "Dames" : "Heren") + '</button>'; }).join("");
+    var segKl = kls.map(function (k) { return '<button class="fc" data-vk="' + esc(k) + '" aria-pressed="' + (k === kl) + '">' + esc(k) + '</button>'; }).join("");
+    var tbl = "";
+    if (d) {
+      tbl = '<div style="overflow-x:auto"><table class="vlt"><thead><tr><th class="l">Club</th>' + d.labels.map(function (l) { return '<th>' + esc(l) + '</th>'; }).join("") + '</tr></thead><tbody>' +
+        d.clubs.map(function (c) {
+          return '<tr' + (hi.indexOf(norm(c.club)) >= 0 ? ' class="me"' : "") + '><td class="l">' + esc(c.club) + '</td>' + c.pos.map(function (x, i) {
+            var pv = i ? c.pos[i - 1] : null, cl = x == null ? "" : x === 1 ? "p1" : pv != null && x < pv ? "up" : pv != null && x > pv ? "dn" : "";
+            return '<td class="' + cl + '">' + (x == null ? "" : x) + '</td>';
+          }).join("") + '</tr>';
+        }).join("") + '</tbody></table></div><div class="sub" style="margin-top:8px">' + (kl === "Promotieklasse" ? "Kolommen: datum van de weekstand." : "Kolommen: speelronde.") + ' Groen: hoger dan de vorige keer, rood: lager. Oranje: clubs van je wedstrijden.</div>';
+    }
+    $("sheet").innerHTML = '<div class="grab"></div><button class="close" id="xClose" aria-label="Sluiten">&times;</button><div class="lab">Positie in het seizoen</div>' +
+      (d ? '<div class="fchips" style="margin:8px 0">' + segSx + segKl + '</div><div class="sub" style="margin-bottom:6px">' + esc(kl) + " " + (sx === "D" ? "dames" : "heren") + (d.season ? " \u00b7 " + esc(d.season) : "") + '</div>' + tbl :
+        '<div class="sub" style="margin-top:8px">Nog geen verloop in het telefoonbestand. Druk in HAS op Zet op telefoon.</div>');
+    $("sheet").classList.add("wide"); $("sheetbg").classList.add("on", "center"); $("xClose").onclick = closeSheet;
+    $("sheet").querySelectorAll("[data-vs]").forEach(function (b) { b.onclick = function () { openVerloop(b.dataset.vs, kl); }; });
+    $("sheet").querySelectorAll("[data-vk]").forEach(function (b) { b.onclick = function () { openVerloop(sx, b.dataset.vk); }; });
+  }
   function closeSheet() { $("sheetbg").classList.remove("on"); $("sheet").classList.remove("wide"); }
 
   /* ---------- iPad landscape ---------- */
@@ -802,7 +830,7 @@ body.w .bar, body.w::before { display: none; }
   function headerWide() {
     var has = S.data && S.data.matches.length;
     return '<div class="top2"><div class="r1"><div class="bl"><div class="brand">HAS<i>.</i>LIVE</div><div class="stamp">' + stampText().replace("<br>", " · ") + '</div></div>' +
-      (has ? '<button class="hbtn" id="bStand">Stand</button><button class="hbtn" id="bTops">Topscorers</button><button class="hbtn" id="bArch">Archief</button><button class="hbtn" id="bOrder" aria-pressed="' + S.reorder + '">Volgorde</button><div class="chips" role="tablist">' + chipsHtml() + '</div>' : '<span style="flex:1"></span>') +
+      (has ? '<button class="hbtn" id="bStand">Stand</button><button class="hbtn" id="bTops">Topscorers</button><button class="hbtn" id="bArch">Archief</button><button class="hbtn" id="bVerl">Verloop</button><button class="hbtn" id="bOrder" aria-pressed="' + S.reorder + '">Volgorde</button><div class="chips" role="tablist">' + chipsHtml() + '</div>' : '<span style="flex:1"></span>') +
       '<button class="hbtn pri" id="bDrive2"' + (S.busy ? " disabled" : "") + '>' + (S.busy ? "Bezig..." : "Vernieuwen") + '</button><button class="hbtn" id="bFile2">Uitloggen</button></div></div>';
   }
   function sbSide(m) {
@@ -886,7 +914,7 @@ body.w .bar, body.w::before { display: none; }
     on("[data-p]", function (b) { b.onclick = function () { openPlayer(+b.dataset.p); }; });
     on("[data-mv]", function (x) { x.onclick = function (e) { e.stopPropagation(); moveMatch(+x.dataset.mv, +x.dataset.dir); }; });
     var bS = $("bStand"); if (bS) bS.onclick = openStand;
-    var bT = $("bTops"); if (bT) bT.onclick = openTops; var bAr = $("bArch"); if (bAr) bAr.onclick = function () { openArchief(0); };
+    var bT = $("bTops"); if (bT) bT.onclick = openTops; var bAr = $("bArch"); if (bAr) bAr.onclick = function () { openArchief(0); }; var bVl = $("bVerl"); if (bVl) bVl.onclick = function () { openVerloop("D", "Hoofdklasse"); };
     var bO = $("bOrder"); if (bO) bO.onclick = function () { S.reorder = !S.reorder; render(); };
     var bA = $("bAll"); if (bA) bA.onclick = function () { S.formAll = !S.formAll; render(); };
     $("bDrive2").onclick = fromDrive;
@@ -919,7 +947,7 @@ body.w .bar, body.w::before { display: none; }
     $("app").querySelectorAll("[data-f]").forEach(function (b) { b.onclick = function () { S.flt = b.dataset.f; render(); }; });
     fitRows();
     var bS = $("bStand"); if (bS) bS.onclick = openStand;
-    var bT = $("bTops"); if (bT) bT.onclick = openTops; var bAr = $("bArch"); if (bAr) bAr.onclick = function () { openArchief(0); };
+    var bT = $("bTops"); if (bT) bT.onclick = openTops; var bAr = $("bArch"); if (bAr) bAr.onclick = function () { openArchief(0); }; var bVl = $("bVerl"); if (bVl) bVl.onclick = function () { openVerloop("D", "Hoofdklasse"); };
     var bO = $("bOrder"); if (bO) bO.onclick = function () { S.reorder = !S.reorder; render(); };
     $("app").querySelectorAll("[data-mv]").forEach(function (x) { x.onclick = function (e) { e.stopPropagation(); moveMatch(+x.dataset.mv, +x.dataset.dir); }; });
     $("app").querySelectorAll("[data-fm]").forEach(function (b) { b.onclick = function () { openForm(b.dataset.club, b.dataset.fm, b.dataset.sex); }; });
