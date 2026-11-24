@@ -810,7 +810,7 @@ body.w .bar, body.w::before { display: none; }
             var pv = i ? c.pos[i - 1] : null, cl = x == null ? "" : x === 1 ? "p1" : pv != null && x < pv ? "up" : pv != null && x > pv ? "dn" : "";
             return '<td class="' + cl + '">' + (x == null ? "" : x) + '</td>';
           }).join("") + '</tr>';
-        }).join("") + '</tbody></table></div><div class="sub" style="margin-top:8px">' + (kl === "Promotieklasse" ? "Kolommen: datum van de weekstand." : "Kolommen: speelronde.") + ' Groen: hoger dan de vorige keer, rood: lager. Oranje: clubs van je wedstrijden.</div>';
+        }).join("") + '</tbody></table></div><div class="sub" style="margin-top:8px">' + (kl === "Promotieklasse" ? "Kolommen: datum van de weekstand." : "Kolommen: speelronde.") + ' Groen: hoger dan de vorige keer, rood: lager. Oranje: clubs van je wedstrijden.' + (d.labels.some(function (l) { return /\*$/.test(l); }) ? ' * = berekend uit de uitslagen van het verzamelartikel.' : '') + '</div>';
     }
     $("sheet").innerHTML = '<div class="grab"></div><button class="close" id="xClose" aria-label="Sluiten">&times;</button><div class="lab">Positie in het seizoen</div>' +
       (d ? '<div class="fchips" style="margin:8px 0">' + segSx + segKl + '</div><div class="sub" style="margin-bottom:6px">' + esc(kl) + " " + (sx === "D" ? "dames" : "heren") + (d.season ? " \u00b7 " + esc(d.season) : "") + '</div>' + tbl :
