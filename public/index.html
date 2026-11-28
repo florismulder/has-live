@@ -690,7 +690,7 @@ body.w .bar, body.w::before { display: none; }
     var h = "", tg = f.tegen;
     if (tg && tg.items && tg.items.length) h += '<div class="note" style="border-style:solid;border-color:#c0563a;margin:8px 0"><div class="lab" style="color:#c0563a">Tegen ' + esc(tg.club) + "</div>" + tg.items.map(feitRow).join("") + "</div>";
     var l = f.lijst || [];
-    if (l.length) h += '<div class="lab" style="margin-top:12px">Feiten, nieuwste eerst</div>' + l.map(feitRow).join("");
+    if (l.length) h += '<div class="lab" style="margin-top:12px">Feiten</div>' + l.map(feitRow).join("");
     return h;
   }
   function playerHTML(pid) {
