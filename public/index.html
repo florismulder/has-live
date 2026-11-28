@@ -680,6 +680,19 @@ body.w .bar, body.w::before { display: none; }
     if (!h.length) return "";
     return '<div class="lab" style="margin-top:12px">Eerdere seizoenen</div><div class="sub">' + h.map(function (x) { return esc(x.season) + ": " + esc(x.goals || 0) + " goals" + ((x.groen || x.geel || x.rood) ? " \u00b7 kaarten " + (x.groen || 0) + "-" + (x.geel || 0) + "-" + (x.rood || 0) : ""); }).join("<br>") + '</div>';
   }
+  function feitRow(x) {
+    var t = x.src === "eigen" ? "<b>" + esc(x.tekst) + "</b>" : esc(x.tekst);
+    var col = x.groep === "tegen" ? ' style="color:#c0563a;font-weight:600"' : "";
+    return '<div class="line"><div' + col + ">" + t + '</div><div class="src">' + esc(x.label || "") + "</div></div>";
+  }
+  function feitenHTML(p) {
+    var f = p.feiten; if (!f) return "";
+    var h = "", tg = f.tegen;
+    if (tg && tg.items && tg.items.length) h += '<div class="note" style="border-style:solid;border-color:#c0563a;margin:8px 0"><div class="lab" style="color:#c0563a">Tegen ' + esc(tg.club) + "</div>" + tg.items.map(feitRow).join("") + "</div>";
+    var l = f.lijst || [];
+    if (l.length) h += '<div class="lab" style="margin-top:12px">Feiten, nieuwste eerst</div>' + l.map(feitRow).join("");
+    return h;
+  }
   function playerHTML(pid) {
     var m = cur(), p = S.data.players[pid]; if (!m || !p) return "";
     var st = p.stats || {}, lines = linesAbout(m, p), idx = S.list.indexOf(pid);
@@ -691,7 +704,8 @@ body.w .bar, body.w::before { display: none; }
       (p.injury ? '<div class="note err">Geblesseerd: ' + esc(typeof p.injury === "string" ? p.injury : (p.injury.text || p.injury.note || "ja")) + '</div>' : "") +
       '<div class="blocks"><div class="blk"><b>' + esc(st.goals == null ? 0 : st.goals) + '</b><small>doelpunten</small></div><div class="blk"><b>' + esc(st.vd || 0) + "/" + esc(st.sc || 0) + "/" + esc(st.sb || 0) + '</b><small>VD / SC / SB</small></div><div class="blk"><b>' + esc(st.groen || 0) + "-" + esc(st.geel || 0) + "-" + esc(st.rood || 0) + '</b><small>groen-geel-rood</small></div></div>';
     var pr = prestOf(p.bio); if (pr) h += '<div class="note" style="border-style:solid;border-color:var(--accent);margin:8px 0"><div class="lab">\u2605 Prestaties</div>' + esc(String(p.bio.prest).replace(/ \| /g, "; ")) + '</div>';
-    h += bioBlock(p) + seasonRows(st) + cardRows(p) + histRows(st);
+    h += feitenHTML(p);
+    h += bioBlock(p) + seasonRows(st) + cardRows(p) + (p.feiten ? "" : histRows(st));
     if (lines.length) h += '<div class="lab" style="margin-top:12px">In het voorbereidingsdocument</div>' + lines.map(function (x) { return '<div class="line">' + mark(x, p) + '</div>'; }).join("");
     if (news.length) h += '<div class="lab" style="margin-top:12px">Nieuws</div>' + news.map(function (n) { return '<div class="line"><div>' + esc(n.summary) + '</div><div class="src">' + esc(nice(n.date)) + " \u00b7 " + esc(n.title) + '</div></div>'; }).join("");
     if ((p.career || []).length) h += '<div class="lab" style="margin-top:12px">Loopbaan</div><div class="sub">' + p.career.map(function (c) { return esc(c.season) + " " + esc(c.club) + (c.number != null ? " #" + esc(c.number) : ""); }).join("<br>") + '</div>';
